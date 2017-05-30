@@ -9,10 +9,18 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all
   end
 
+  def new
+    @tweet = Tweet.new
+
+  def create
+    @tweet = Tweet.new
+  end
 
   private
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end
 
+  def tweet_params
+    params.require(:tweet).permit(:body)
 end
