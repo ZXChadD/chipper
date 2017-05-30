@@ -1,4 +1,4 @@
-<h1>Main Page</h1>
+<p class="navbar-text pull-right">
 
 <% if user_signed_in? %>
   Logged in as <strong><%= current_user.email %></strong>.
@@ -6,14 +6,13 @@
   <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
 <% end %>
 
-
 <br>
 <%= link_to "New Chipper", new_tweet_path %>
 
 <br>
 
 <% @tweets.each do |tweet| %>
-<%= tweet.body %> <br>
-<%= link_to :Edit, edit_tweet_path(tweet) %>
-<%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } %> <br>
+  <%= tweet.body %> <br>
+  <%= link_to :Edit, edit_tweet_path(tweet) %>
+  <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } %> <br>
 <% end %>
