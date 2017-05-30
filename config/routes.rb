@@ -5,6 +5,6 @@ Rails.application.routes.draw do
     resources :replies
   end
 
-  root 'tweets#index'
+  root 'tweets#home'
 
 end
