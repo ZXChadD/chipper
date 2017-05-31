@@ -1,14 +1,18 @@
-<link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Montserrat+Subrayada" rel="stylesheet" >
-<h1 id = 'title'> ChipperT </h1>
-<body id = 'homepage'>
-  <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.email %></strong>.
-    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-  <% else %>
-  <div class='row col-md-8 col-md-offset-2'>
-    <button class = 'btn md cta'><%= link_to "Sign up", new_user_registration_path %></button>
-    <button class = 'btn md ghost'><%= link_to "Login", new_user_session_path %></button>
+<div class='container'>
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Montserrat+Subrayada" rel="stylesheet" >
+  <h1 id='title'> ChipperT </h1>
+  <div id='homepage'>
+    <% if user_signed_in? %>
+      Logged in as <strong><%= current_user.email %></strong>.
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <% else %>
+      <div class='row'>
+        <div class='col-md-8 col-md-offset-2'>
+          <button class='btn md cta'><%= link_to "Sign up", new_user_registration_path %></button>
+          <button class='btn md ghost'><%= link_to "Login", new_user_session_path %></button>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <% end %>
-</body>
+</div>

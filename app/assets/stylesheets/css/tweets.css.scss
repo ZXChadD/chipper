@@ -5,10 +5,10 @@
 }
 
 $primary: #5a4dd6;
+
 * {
   color: white !important;
   box-sizing: border-box;
-  font-size: 40px;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
   font-family: 'Montserrat+Subrayada', 'Sans Serif' !important;
   max-width: 100%;
   overflow-x: hidden;
-  background: url('http://i.imgur.com/LGXtkEh.jpg') no-repeat center center fixed;
+  background: image-url('Banner.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -38,6 +38,8 @@ body {
   padding: 0;
   margin-top: 5px;
   margin-bottom: 5px;
+  font-size: 2em;
+
 }
 
 .md {
