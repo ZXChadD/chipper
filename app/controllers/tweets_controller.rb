@@ -21,6 +21,14 @@ class TweetsController < ApplicationController
     redirect_to tweets_path(@tweet)
     else render 'new'
     end
+
+    @comment = Tweet.new(tweet_params)
+    @tweet.user = current_user
+
+    if @tweet.save!
+    redirect_to tweets_path(@tweet)
+    else render 'new'
+    end
   end
 
   def edit

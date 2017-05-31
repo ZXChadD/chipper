@@ -1,18 +1,30 @@
 <p class="navbar-text pull-right">
 
+<%= link_to "New Chipper", new_tweet_path %>
 <% if user_signed_in? %>
   Logged in as <strong><%= current_user.email %></strong>.
   <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
   <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
 <% end %>
 
-<br>
-<%= link_to "New Chipper", new_tweet_path %>
 
-<br>
+<table>
+  <% @tweets.each do |tweet| %>
+  <tr>
+    <td><%= tweet.body %></td>
 
-<% @tweets.each do |tweet| %>
-  <%= tweet.body %> <br>
-  <%= link_to :Edit, edit_tweet_path(tweet) %>
-  <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } %> <br>
+    <td><%= link_to :Edit, edit_tweet_path(tweet) %></td>
+
+    <td><%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } %></td>
+
+    <td><%= link_to "Reply" %></td>
+  </tr>
+  <tr>
+    <%= form_for [@tweet, @reply] do |f| %>
+    <%= f.text_area :body %><br>
+    <%= f.submit "Submit" %>
+    <% end %>
+  </tr>
+
+</table>
 <% end %>
