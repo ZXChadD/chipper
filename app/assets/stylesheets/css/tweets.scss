@@ -11,13 +11,18 @@ $primary: #5a4dd6;
   box-sizing: border-box;
 }
 
+#landing_page{
+  background-color: rgba(255, 255, 255, 0.5);
+  height:100vh;
+}
+
 body {
-  background-color: rgba(255, 255, 255, 0.6) !important;
   font-family: 'Montserrat+Subrayada', 'Sans Serif' !important;
   max-width: 100%;
   overflow-x: hidden;
   background: image-url('Banner.jpg') no-repeat center center fixed;
   background-size: cover;
+
 }
 
 .row {
