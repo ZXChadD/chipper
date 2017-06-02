@@ -27,11 +27,9 @@ class TweetsController < ApplicationController
   end
 
   def update
-    byebug
     if @tweet.update(tweet_params)
       redirect_to tweets_path
     else
-    byebug
       render :edit
     end
   end

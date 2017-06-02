@@ -1,20 +1,25 @@
-#title {
+.title {
   font-family: 'Kaushan Script','Arial';
-  font-size: 18em;
+  font-size: 19em;
   text-align: center;
 }
 
-$primary: #5a4dd6;
-
-* {
-  color: black !important;
-  box-sizing: border-box;
+#homepage{
+  color: white !important;
 }
 
 #landing_page{
   background-color: rgba(255, 255, 255, 0.5);
   height:100vh;
 }
+
+.signup_page{
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 30%;
+}
+
+
+$primary: #5a4dd6;
 
 body {
   font-family: 'Montserrat+Subrayada', 'Sans Serif' !important;
@@ -32,7 +37,11 @@ body {
   text-align: center;
   vertical-align: center;
   margin-top: 3em;
+}
 
+.edit_page{
+  text-align: left;
+  vertical-align: left;
 }
 
 .btn {
@@ -71,7 +80,6 @@ body {
 
   &:hover {
     background-color: $primary;
-
     transition: .2s ease;
   }
 }
