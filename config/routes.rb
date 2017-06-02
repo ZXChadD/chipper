@@ -8,4 +8,7 @@ Rails.application.routes.draw do
     resources :replies
   end
 
+  resources :admin do
+    resources :users, :tweets, :replies, only: [:index]
+  end
 end
