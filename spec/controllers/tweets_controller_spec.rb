@@ -48,23 +48,17 @@ RSpec.describe TweetsController, type: :controller do
   end
 
   describe "PUT #update" do
-    before :each do
-      @tweet = create(:tweet, body: "law")
-    end
-    context "valid attributes" do
-      it "located the requested @tweet" do
-        put :update, params: { id: @tweet }, tweet: FactoryGirl.attributes_for(:tweet)
-        assigns(:tweet).should eq(@tweet)
-    end
-       it "changes the contact's attributes" do
-         put :update, params: { id: @tweet }, tweet: FactoryGirl.attributes_for(:tweet, body: 'edit body')
-         @tweet.reload
-         @tweet.body.should eq 'edit body'
-       end
-       it "redirects to the updated content" do
-         put :update, params: { id: @tweet }, tweet: FactoryGirl.attributes_for(:tweet)
-         reponse.should redirect_to @tweet
-       end
+    let!(:tweet) { create(:tweet) }
+
+     it "updates an item with valid params" do
+       put :update, params: { id: tweet, tweet: { body: "new body" } }
+       tweet.reload
+       expect(tweet.body).to eq("new body")
+     end
+     it "updates an item with invalid params" do
+       put :update, params: { id: tweet, tweet: { body: "" } }
+       tweet.reload
+       expect(response).to render_template(:edit)
      end
    end
  end
