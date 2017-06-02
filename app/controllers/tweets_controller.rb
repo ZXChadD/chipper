@@ -16,10 +16,10 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
-
-    if @tweet.save!
-    redirect_to tweets_path(@tweet)
-    else render 'new'
+    if @tweet.save
+      redirect_to tweets_path
+    else
+      render :new
     end
   end
 
@@ -27,9 +27,12 @@ class TweetsController < ApplicationController
   end
 
   def update
+    byebug
     if @tweet.update(tweet_params)
-      redirect_to tweets_path(@tweet)
-    else render 'edit'
+      redirect_to tweets_path
+    else
+    byebug
+      render :edit
     end
   end
 
