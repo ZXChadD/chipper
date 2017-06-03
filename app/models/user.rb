@@ -5,8 +5,24 @@ class User < ApplicationRecord
            :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :tweets, dependent: :destroy
-  has_many :replies
   validates :email, presence: true, uniqueness: true
+  has_many :replies
+
+  has_many :active_relationships, class_name:"Relationship", foreign_key:"follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name:"Relationship", foreign_key:"followed_id", dependent: :destroy
+  has_many :folowing, through: :active_relationships, source: :followed
+  has_many :folowing, through: :passive_relationships, source: :follower
+
+  def follow(other)
+    active_relationships.create(follower_id: other.id)
+  end
+  def unfollow(other)
+    active_relationships.find_by(follower_id: other.id).destroy
+  end
+
+  def follwoing(user)
+    following.include?(other)
+  end
 
 
   def self.from_omniauth(auth)
