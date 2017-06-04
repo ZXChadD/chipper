@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   end
 
   resources :admin do
-    resources :users, :tweets, :replies, only: [:index]
+    resources :users, :tweets, :replies, only: [:index, :destroy]
   end
 end

@@ -1,1 +1,12 @@
-<h1>Admin</h1>
+<div class = 'containder'>
+  <div class = 'row'>
+    <table>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+      </tr>
+      <% end %>
+
+    </table>
+  </div>
+</div>
