@@ -1,32 +1,59 @@
-<div id = 'landing_page', class = 'container'>
-  <div class = 'row'>
-    <p class="col-sm-6 navbar-text pull-right">
+<div class='container', id = 'landing_page'>
 
-    <%= link_to "New Chipper", new_tweet_path %>
-    <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>.
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-    <% end %>
-
-    <table class= 'col-sm-6 col-sm-offset-3'>
-      <% @tweets.each do |tweet| %>
-      <tr>
-        <td colspan=""><%= tweet.body %></td>
-      </tr>
-
-        <% tweet.replies.each do |reply| %>
-        <tr><td><%= reply.body %></td></tr>
-        <% end %>
-
-      <tr>
-        <td><%= link_to :Edit, edit_tweet_path(tweet) %></td>
-        <td><%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } %></td>
-        <td><%= link_to :Reply, new_tweet_reply_path(tweet)%></td>
-      </tr>
-
-
-      <% end %>
-    </table>
+  <div class='row'>
+    <div class="col-sm-12">
+      <nav class="navbar navbar-inverse" id="top-navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <%= image_tag "chipper-icon.png", :class => 'logo' %>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><%= link_to :Home, tweets_path %></li>
+            <li><a href="#">About</a></li>
+            <li><%= link_to "New Chipper", new_tweet_path %></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <li>
+              <%= link_to edit_user_registration_path do%>
+              <span class="glyphicon glyphicon-user"></span>Edit Profile
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do%>
+              <span class="glyphicon glyphicon-log-in"></span>Log Out
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col-sm-7">
+      <div class="card text-center">
+        <% @tweets.each do |tweet| %>
+        <div class="card-header">
+          Featured
+        </div>
+        <div class="card-block">
+          <h4 class="card-title"><%= tweet.body %></h4>
+          <% tweet.replies.each do |reply| %>
+          <p class="card-text"><%= reply.body %></p>
+          <% end %>
+        </div>
+        <div class="card-footer text-muted">
+          <%= link_to :Edit, edit_tweet_path(tweet), :class => "post-bottom-button" %>
+          <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
+          <%= link_to :Reply, new_tweet_reply_path(tweet), :class => "post-bottom-button" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>

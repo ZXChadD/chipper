@@ -1,9 +1,17 @@
-<%= form_for @tweet do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3" id="chipper-box">
 
-      <%= f.label :ChipperT %><br>
-      <%= f.text_area :body %>
+    <%= form_for @tweet do |f| %>
+    <h3>Compose New Chipper</h3>
+    <%= f.label :ChipperT %>
+    <br>
+    <%= f.text_area :body %>
+    <br>
+    <%= f.submit "Chipper away" %>
+    <%= link_to "Cancel", tweets_path, :id => 'cancel-button' %>
 
-      <%= f.submit "Chipper away" %>
-      <%= link_to "Cancel", tweets_path %>
-
-  <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
