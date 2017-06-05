@@ -22,6 +22,9 @@ gem 'uglifier', '>= 1.3.0'
 
 #new gems
 gem 'devise'
+
+gem 'faker', '~> 1.4', '>= 1.4.3'
+=======
 gem "jquery-rails"
 gem 'omniauth-facebook'
 
