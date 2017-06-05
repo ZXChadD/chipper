@@ -3,7 +3,6 @@ class RepliesController < ApplicationController
   before_action :set_tweet
 
   def new
-    byebug
     @reply = Reply.new
   end
 

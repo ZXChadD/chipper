@@ -16,12 +16,16 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
-    if @tweet.save
-      redirect_to tweets_path
-    else
-      render :new
-    end
-  end
+
+   respond_to do |format|
+     if @tweet.save!
+       format.html { redirect_to tweets_path() }
+       format.js
+     else
+       format.html { render action: "new" }
+     end
+   end
+ end
 
   def edit
   end
