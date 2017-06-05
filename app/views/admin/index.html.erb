@@ -1,12 +1,19 @@
-<div class = 'containder'>
-  <div class = 'row'>
-    <table>
-      <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-      </tr>
-      <% end %>
 
-    </table>
-  </div>
-</div>
+<h1>Admin</h1>
+
+<table>
+  <tr>
+    <th>Total number of users:</th>
+    <td><%= User.count %></td>
+  </tr>
+
+  <tr>
+  <th>Users</th>
+  </tr>
+    <% User.all.each do |u| %>
+    <tr><td><%= u.email %></td>
+    <% end %>
+  </tr>
+
+</table>
+

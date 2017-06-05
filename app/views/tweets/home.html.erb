@@ -1,10 +1,20 @@
-<div class='container' id = 'homepage'>
-  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Montserrat+Subrayada" rel="stylesheet" >
-  <h1 class='title'> ChipperT </h1>
-  <div class='row'>
-    <div class='col-md-8 col-md-offset-2'>
-      <button class='btn md cta'><%= link_to "Sign up", new_user_registration_path %></button>
-      <button class='btn md ghost'><%= link_to "Login", new_user_session_path %></button>
+
+<body class="photopage">
+  <div class='container'>
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-4" id="homepage">
+            <h1 class='title'> ChipperT </h1>
+            <br>
+            <%= image_tag("chipper-icon.png") %>
+            <br>
+
+            <%= link_to "Sign up", new_user_registration_path, :class => 'homebutton'%>
+            <%= link_to "Login", new_user_session_path, :class => 'homebutton'%>
+
+      </div>
     </div>
   </div>
-</div>
+
+
+
+</body>
