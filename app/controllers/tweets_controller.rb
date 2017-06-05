@@ -17,6 +17,7 @@ class TweetsController < ApplicationController
   end
 
   def create
+    @tweets = Tweet.all.order('created_at DESC')
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
 
