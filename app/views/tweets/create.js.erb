@@ -1,1 +1,6 @@
-$('#tweet_index_container').html("<%= j render partial: 'tweet_index' %>")
+if ("<%= @tweet.id %>"){
+  $('#tweet_index_container').html("<%= j render partial: 'tweet_index' %>");
+  $('#tweet_form').children('#tweet_body').val('');
+} else {
+  $('#tweet_index_container').html("<%= j render partial: 'tweet_form' %>")
+}
