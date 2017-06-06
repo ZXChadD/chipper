@@ -1,28 +1,27 @@
-
 <div class='container', id = 'landing_page'>
 
   <div class='row'>
-    <div class="col-sm-12">
-      <nav class="navbar navbar-inverse" id="top-navbar">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <%= image_tag "chipper-icon.png", :class => 'logo' %>
+    <div class='col-sm-12'>
+      <nav class='navbar navbar-inverse' id='top-navbar'>
+        <div class='container-fluid'>
+          <div class='navbar-header'>
+            <%= image_tag 'chipper-icon.png', :class => 'logo' %>
           </div>
-          <ul class="nav navbar-nav">
+          <ul class='nav navbar-nav'>
             <li><%= link_to :Home, tweets_path %></li>
-            <li><a href="#">About</a></li>
-            <li><%= link_to "New Chipper", new_tweet_path, id: 'new_chipper', remote: true %></li>
+            <li><%= link_to 'Profile Page', user_path(:id) %></li>
+            <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', remote: true %></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class='nav navbar-nav navbar-right'>
             <% if user_signed_in? %>
             <li>
               <%= link_to edit_user_registration_path do%>
-              <span class="glyphicon glyphicon-user"></span>Edit Profile
+              <span class='glyphicon glyphicon-user'></span>Edit Profile
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do%>
-              <span class="glyphicon glyphicon-log-in"></span>Log Out
+              <span class='glyphicon glyphicon-log-in'></span>Log Out
               <% end %>
             </li>
             <% end %>
@@ -32,7 +31,7 @@
     </div>
   </div>
 
-  <div id="tweet_index_container">
+  <div id='tweet_index_container'>
 
     <%= render partial: 'tweet_index'%>
 
