@@ -26,6 +26,9 @@ gem 'devise'
 gem 'faker', '~> 1.6', '>= 1.6.3'
 gem "jquery-rails"
 gem 'omniauth-facebook'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
