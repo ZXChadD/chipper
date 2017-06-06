@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170607074034) do
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
 
+
   create_table "hearts", force: :cascade do |t|
     t.bigint "tweet_id"
     t.bigint "user_id"
@@ -57,16 +58,18 @@ ActiveRecord::Schema.define(version: 20170607074034) do
     t.index ["tweet_id"], name: "index_likes_on_tweet_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
 
+    t.index ["tweet_id"], name: "index_hearts_on_tweet_id"
+    t.index ["user_id"], name: "index_hearts_on_user_id"
+
   end
 
-  create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+  create_table "likes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["followed_id"], name: "index_relationships_on_followed_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.bigint "user_id"
+    t.bigint "tweet_id"
+    t.index ["tweet_id"], name: "index_likes_on_tweet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "replies", force: :cascade do |t|

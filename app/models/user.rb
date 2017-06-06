@@ -22,6 +22,10 @@ class User < ApplicationRecord
   validates_processing_of :avatar
 
   has_many :tweets, dependent: :destroy
+
+  has_many :replies
+  has_many :likes
+
   validates :email, presence: true, uniqueness: true
   has_many :replies
 

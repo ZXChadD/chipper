@@ -55,6 +55,7 @@ class TweetsController < ApplicationController
     redirect_to tweets_path
   end
 
+
   private
   def set_tweet
     @tweet = Tweet.find(params[:id])

@@ -15,10 +15,14 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   resources :tweets do
+    member do
+      post 'upvote'
+    end 
     resources :replies
       collection do
         get 'feed'
       end
+
   end
 
   resources :admin
