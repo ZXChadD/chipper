@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'tweets#home'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-    resources :user do
+    resources :users do
       member do
         get :following, :followers
       end

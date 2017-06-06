@@ -10,6 +10,7 @@ class TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.all.order('created_at DESC')
+    @user = current_user
   end
 
   def new

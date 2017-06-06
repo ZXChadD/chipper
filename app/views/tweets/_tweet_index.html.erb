@@ -7,7 +7,7 @@
         "Quote of the Day"
       </div>
       <div class="card-block">
-        <p class="card-title"><%= tweet.body %></p>
+        <span class="card-title"><%= tweet.user.email %>  says  <%= tweet.body %></span>
         <% tweet.replies.each do |reply| %>
         <p class="card-text"><%= reply.body %></p>
         <% end %>
