@@ -9,6 +9,7 @@ class TweetsController < ApplicationController
   end
 
   def index
+    @tweet = Tweet.new
     @tweets = Tweet.all.order('created_at DESC')
     @user = current_user
   end
@@ -24,7 +25,6 @@ class TweetsController < ApplicationController
 
    respond_to do |format|
      if @tweet.save!
-       format.html { redirect_to tweets_path() }
        format.js
      else
        format.html { render action: "new" }

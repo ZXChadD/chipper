@@ -25,15 +25,15 @@ RSpec.describe TweetsController, type: :controller do
 
   describe 'POST #create' do
     before do
-      post :create, params: { tweet: params}
+      post :create, xhr: true, params: { tweet: attributes }
     end
     context 'when user save passes' do
-      let(:params) {attributes_for(:tweet)}
+      let(:attributes) {attributes_for(:tweet)}
       it {expect(response).to redirect_to tweets_path}
     end
 
     context 'when user save fails' do
-      let(:params) {attributes_for(:tweet, :invalid)}
+      let(:attributes) {attributes_for(:tweet, :invalid)}
       it  {expect(response).to render_template(:new)}
     end
   end
