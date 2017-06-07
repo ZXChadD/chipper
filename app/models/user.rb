@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
+
+  attr_accessor :login
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,8 +32,6 @@ class User < ApplicationRecord
 
   has_many :following, class_name: 'Relationship', foreign_key: 'follower_id'
   has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id'
-
-  attr_accessor :login
 
   def follow(other)
     following.create!(followed: other)
@@ -76,7 +77,7 @@ class User < ApplicationRecord
       end
     end
   end
-  
+
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)

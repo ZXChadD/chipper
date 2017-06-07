@@ -7,8 +7,13 @@
       <%= devise_error_messages! %>
 
       <div class="field">
+        <%= f.label :email %><br />
+        <%= f.text_field :email, autofocus: true %>
+      </div>
+
+      <div class="field">
         <%= f.label :username %><br />
-        <%= f.text_field :username, autofocus: true %>
+        <%= f.text_field :username, required: true %>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
