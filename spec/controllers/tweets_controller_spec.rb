@@ -14,14 +14,14 @@ RSpec.describe TweetsController, type: :controller do
     it { expect(assigns(:tweets)).to eq(tweets)}
   end
 
-  describe 'GET #new' do
-    before do
-      get :new
-    end
-
-    it {expect(assigns(:tweet)).to be_new_record}
-
-  end
+  # describe 'GET #new' do
+  #   before do
+  #     get :new
+  #   end
+  #
+  #   it {expect(assigns(:tweet)).to be_new_record}
+  #
+  # end
 
   describe 'POST #create' do
     before do
@@ -29,12 +29,12 @@ RSpec.describe TweetsController, type: :controller do
     end
     context 'when user save passes' do
       let(:attributes) {attributes_for(:tweet)}
-      it {expect(response).to redirect_to tweets_path}
+      it {expect(response).to render_template(:create)}
     end
 
     context 'when user save fails' do
       let(:attributes) {attributes_for(:tweet, :invalid)}
-      it  {expect(response).to render_template(:new)}
+      it {expect(response).to render_template(:create)}
     end
   end
 

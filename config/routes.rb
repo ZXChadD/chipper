@@ -15,7 +15,6 @@ Rails.application.routes.draw do
 
   namespace "admin" do
     resources :users, :tweets, :replies, only: [:index]
-
   end
 
 end
