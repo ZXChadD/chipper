@@ -17,7 +17,7 @@ end
 
 10.times do
      Tweet.create(
-        body: Faker::Lorem.sentence,
+        body: Faker::HowIMetYourMother.quote,
         user_id: 12
       )
 end
