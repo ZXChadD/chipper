@@ -24,10 +24,10 @@ class TweetsController < ApplicationController
     @tweet.user = current_user
 
    respond_to do |format|
-     if @tweet.save!
+     if @tweet.save
        format.js
      else
-       format.html { render action: "new" }
+       format.js
      end
    end
  end
