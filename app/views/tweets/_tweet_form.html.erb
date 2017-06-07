@@ -1,12 +1,12 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6" id="chipper-box">
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-6' id='chipper-box'>
       <%= form_for @tweet, remote: true, html: { id: 'tweet_form' } do |f| %>
       <h3>Compose New Chipper</h3>
       <%= f.text_area :body %>
       <br>
-      <%= f.submit "Chipper away" %>
-      <button type="button" id="cancel-button" data-dismiss="modal" aria-label="Close"><%= link_to "Cancel", tweets_path %></button>
+      <%= f.submit 'Chipper away' %>
+      <button type='button' id='cancel-button' data-dismiss='modal' aria-label='Close'><%= link_to 'Cancel', tweets_path %></button>
     <% end %>
     </div>
   </div>
