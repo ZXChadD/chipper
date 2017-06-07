@@ -1,11 +1,7 @@
 class LikesController < ApplicationController
 
   def create
-    byebug
-    @tweet = Tweet.find(params[:id])
-
-    @like = @tweet.likes.new(like_params)
-    @like.user = current_user
+    @like = Like.new(tweet_id = like_params[:tweet], user_id = like_params[:current_user])
 
     if @like.save
       redirect_to tweets_path
@@ -15,6 +11,6 @@ class LikesController < ApplicationController
 
 private
   def like_params
-     params.require(:likes).permit(:user_id, :tweet_id)
+     params.require(:likes).permit(:current_user, :tweet)
   end
 end
