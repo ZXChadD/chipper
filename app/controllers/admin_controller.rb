@@ -5,6 +5,7 @@ class AdminController < ApplicationController
 
   def index
     @users = User.all
+    @tweets = Tweet.find_by(params[:user_id])
   end
 
   def is_admin?

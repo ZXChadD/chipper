@@ -1,19 +1,22 @@
 
-<h1>Admin</h1>
+<h1 id="admin-title">Admin Dashboard</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>Total number of users:</th>
-    <td><%= @users.count %></td>
+    <th>Email</th>
+    <th>Username</th>
+    <th>Created at</th>
+    <th>Last Sign In</th>
+    <th>Option</th>
   </tr>
-
+<% @users.each do |user| %>
   <tr>
-  <th>Users</th>
-  </tr>
-    <% @users.each do |u| %>
-    <tr><td><%= u.email %></td>
-    <% end %>
+      <td><%= user.email %></td>
+      <td><%= user.username %></td>
+      <td><%= user.created_at%></td>
+      <td><%= user.last_sign_in_at %></td>
+      <td><%= link_to "delete", admin_path(user), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      <% end %>
   </tr>
 
 </table>
-
