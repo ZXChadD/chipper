@@ -1,0 +1,6 @@
+<% if current_user.heart?(tweet) %>
+  <%= button_to "Unheart", unheart_path(tweet_id: tweet.id), remote: true, method: :delete %>
+<% else %>
+  <%= button_to "Heart", hearts_path(tweet_id: tweet.id), remote: :true %>
+  <span class="glyphicon glyphicon-heart"></span>
+<% end %>

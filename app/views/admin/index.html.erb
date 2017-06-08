@@ -4,13 +4,13 @@
 <table>
   <tr>
     <th>Total number of users:</th>
-    <td><%= User.count %></td>
+    <td><%= @users.count %></td>
   </tr>
 
   <tr>
   <th>Users</th>
   </tr>
-    <% User.all.each do |u| %>
+    <% @users.each do |u| %>
     <tr><td><%= u.email %></td>
     <% end %>
   </tr>
