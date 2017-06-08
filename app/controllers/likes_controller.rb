@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
 
   def create
-    @like = Like.new(tweet_id = like_params[:tweet], user_id = like_params[:current_user])
+    @like = Like.create(user_id: params[current_user], tweet_id: params[tweet_id])
 
     if @like.save
       redirect_to tweets_path
