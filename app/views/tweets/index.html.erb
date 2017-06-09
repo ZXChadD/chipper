@@ -8,10 +8,11 @@
           </div>
           <ul class='nav navbar-nav'>
             <li><%= link_to :Home, tweets_path %></li>
-            <li><%= link_to 'Profile Page', user_path(:id) %></li>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            <li><%= link_to 'Profile Page', user_path(@user) %></li>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myTweet">
               <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', remote: true %></li>
             </button>
+            <li><%= link_to 'Feed', feed_tweets_path %></li>
           </ul>
           <ul class='nav navbar-nav navbar-right'>
             <% if user_signed_in? %>
@@ -31,16 +32,17 @@
       </nav>
     </div>
   </div>
+  <section class="stats">
+     <%= render partial: 'shared/stats' %>
+  </section>
 
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div id="tweet_form_container">
-              <%= render partial: 'tweet_form'%>
-            </div>
+          <div id="tweet_form_container">
+            <%= render partial: 'tweet_form'%>
+          </div>
         </div>
       </div>
     </div>

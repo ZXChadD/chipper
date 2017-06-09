@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-10.times do
+30.times do
      User.create(
         email: Faker::Internet.email,
         password: 123456
@@ -15,9 +15,9 @@ require 'faker'
 end
 
 
-10.times do
+100.times do
      Tweet.create(
-        body: Faker::HowIMetYourMother.quote,
-        user_id: 12
+        body: Faker::StarWars.quote,
+        user_id: Faker::Number.between(1, 30)
       )
 end

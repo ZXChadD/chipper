@@ -1,20 +1,23 @@
 <h1><%= @user.email %></h1>
-<div id = 'follow_button_container'>
-  <%= render partial: 'follow_button' %>
-</div>
+<section class="stats">
+  <%= render partial: 'shared/stats' %>
+</section>
+<section>
+  <%= render partial: 'shared/follow_form' %>
+</section>
 
 <div class='row'>
 
   <div class="col-sm-7">
     <div class="card text-center">
-      <% @tweet = @user.tweets %>
-      <% @tweet.pluck(:body).each do |t| %>
+      <% @user.tweets.pluck(:body).each do |t| %>
       <div class="card-header">
         "Quote of the Day"
       </div>
       <div class="card-block">
         <span class="card-title"><%= t %></span>
       </div>
+
       <div class="card-footer text-muted">
         <% if @user == current_user %>
         <%= link_to :Edit, edit_tweet_path(), :class => "post-bottom-button" %>
@@ -22,6 +25,7 @@
         <% end %>
       </div>
       <% end %>
+
     </div>
   </div>
 

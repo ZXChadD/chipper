@@ -1,0 +1,23 @@
+<div class='row'>
+
+  <div class="col-sm-7">
+    <div class="card text-center">
+
+
+      <% current_user.following.pluck(:id).each do |id| %>
+        <% User.find(id).tweets.pluck(:body).each do |t|%>
+
+        <div class="card-header">
+          "Quote of the Day"
+        </div>
+        <div class="card-block">
+          <span class="card-title"><%= User.find(id).email %> says <%= t %></span>
+        </div>
+
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>

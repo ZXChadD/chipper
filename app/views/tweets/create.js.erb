@@ -1,6 +1,7 @@
 if ("<%= @tweet.id %>"){
   $('#tweet_index_container').html("<%= j render partial: 'tweet_index' %>");
   $('#tweet_form').children('#tweet_body').val('');
+  $('#tweet_form_container').modal('hide')
 } else {
-  $('#tweet_index_container').html("<%= j render partial: 'tweet_form' %>")
+  $('#tweet_form_container').html("<%= j render partial: 'tweet_form' %>")
 }
