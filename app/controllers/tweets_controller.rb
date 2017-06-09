@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, except: [:home, :index, :show]
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :upvote]
 
   def feed 
   end
@@ -53,6 +53,18 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy!
     redirect_to tweets_path
+  end
+
+  def upvote
+    @tweet = Tweet.find(params[:id])
+    @like = @tweet.likes.create(user_id: current_user.id)
+    respond_to do |format|
+      if @like.save
+        format.js
+      else
+        format.html { render action: "index" }
+      end
+    end
   end
 
 

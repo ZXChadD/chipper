@@ -17,13 +17,13 @@ Rails.application.routes.draw do
   resources :tweets do
     member do
       post 'upvote'
-    end 
+    end
     resources :replies
       collection do
         get 'feed'
       end
+    end
 
-  end
 
   resources :admin
 
