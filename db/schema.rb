@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607073124) do
+
+ActiveRecord::Schema.define(version: 20170607074034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 20170607073124) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
+  create_table "hearts", force: :cascade do |t|
+    t.bigint "tweet_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+
     t.index ["tweet_id"], name: "index_hearts_on_tweet_id"
     t.index ["user_id"], name: "index_hearts_on_user_id"
   end
@@ -43,6 +50,23 @@ ActiveRecord::Schema.define(version: 20170607073124) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
 
+
+
+    t.bigint "user_id"
+    t.bigint "tweet_id"
+    t.index ["tweet_id"], name: "index_likes_on_tweet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["followed_id"], name: "index_relationships_on_followed_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "replies", force: :cascade do |t|
@@ -90,10 +114,20 @@ ActiveRecord::Schema.define(version: 20170607073124) do
     t.boolean "is_admin"
     t.string "provider"
     t.string "uid"
+    t.string "avatar"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.text "bio"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "likes", "tweets"
+  add_foreign_key "likes", "users"
   add_foreign_key "replies", "tweets"
   add_foreign_key "replies", "users"
   add_foreign_key "tweets", "users"
