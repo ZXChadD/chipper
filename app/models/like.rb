@@ -1,4 +1,4 @@
 class Like < ApplicationRecord
   belongs_to :tweet
-  belongs_to :reply
+  belongs_to :user
 end

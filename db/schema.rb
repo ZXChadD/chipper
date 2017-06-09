@@ -11,7 +11,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 20170607074034) do
+ActiveRecord::Schema.define(version: 20170607234029) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170607074034) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+
 
   create_table "hearts", force: :cascade do |t|
     t.bigint "tweet_id"
@@ -57,6 +59,19 @@ ActiveRecord::Schema.define(version: 20170607074034) do
     t.index ["tweet_id"], name: "index_likes_on_tweet_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
 
+    t.index ["tweet_id"], name: "index_hearts_on_tweet_id"
+    t.index ["user_id"], name: "index_hearts_on_user_id"
+
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "tweet_id"
+    t.integer "number"
+    t.index ["tweet_id"], name: "index_likes_on_tweet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
