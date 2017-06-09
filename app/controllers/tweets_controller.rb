@@ -2,6 +2,9 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!, except: [:home, :index, :show]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
+  def feed 
+  end
+
   def home
     if user_signed_in?
       redirect_to tweets_path
@@ -36,7 +39,7 @@ class TweetsController < ApplicationController
   end
 
   def update
-    if @tweet.update(tweet_params)
+    if @tweet.update_attributes(tweet_params)
       redirect_to tweets_path
     else
       render :edit

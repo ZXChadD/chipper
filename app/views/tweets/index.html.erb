@@ -12,6 +12,7 @@
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myTweet">
               <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', remote: true %></li>
             </button>
+            <li><%= link_to 'Feed', feed_tweets_path %></li>
           </ul>
           <ul class='nav navbar-nav navbar-right'>
             <% if user_signed_in? %>
@@ -31,7 +32,9 @@
       </nav>
     </div>
   </div>
-
+  <section class="stats">
+     <%= render partial: 'shared/stats' %>
+  </section>
 
   <div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

@@ -14,10 +14,8 @@
       </div>
       <div class="card-footer text-muted">
         <% if tweet.user == current_user %>
-        <button type="button" data-toggle="modal" data-target="#myTweet" class="post-bottom-button" >
-          <%= link_to :Edit, edit_tweet_path(tweet), remote: true %>
-        </button>
-        <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
+          <%= link_to :Edit, edit_tweet_path(tweet), :class => "post-bottom-button" %>
+          <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
         <% end %>
         <%= link_to :Reply, new_tweet_reply_path(tweet), :class => "post-bottom-button" %>
       </div>

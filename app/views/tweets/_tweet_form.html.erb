@@ -1,7 +1,7 @@
 <div class='container'>
   <div class='row'>
     <div class='col-sm-6' id='chipper-box'>
-      <%= form_for @tweet, remote: true, html: { id: 'tweet_form' } do |f| %>
+      <%= form_for @tweet, remote: true do |f| %>
       <h3>Compose New Chipper</h3>
       <%= f.text_area :body %>
       <br>
