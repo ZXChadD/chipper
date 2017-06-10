@@ -3,38 +3,36 @@
 <%= image_tag @user.avatar, :class => 'profile-pic' %>
 
 
-<h1><%= @user.email %></h1>
+<h1><%= @user.username %></h1>
 
 <section class="stats">
   <%= render partial: 'shared/stats' %>
 </section>
+
 <section>
   <%= render partial: 'shared/follow_form' %>
 </section>
 
-
-<h1><%= @user.username %></h1>
 <div id = 'follow_button_container'>
-  <%= render partial: 'follow_button' %>
+  <%= render partial: 'shared/follow_form' %>
 </div>
-
 
 <div class='row'>
 
   <div class="col-sm-7">
     <div class="card text-center">
-      <% @user.tweets.pluck(:body).each do |t| %>
+      <% @user.tweets.each do |tweet| %>
       <div class="card-header">
         "Quote of the Day"
       </div>
       <div class="card-block">
-        <span class="card-title"><%= t %></span>
+        <span class="card-title"><%= tweet.body %></span>
       </div>
 
       <div class="card-footer text-muted">
         <% if @user == current_user %>
-        <%= link_to :Edit, edit_tweet_path(), :class => "post-bottom-button" %>
-        <%= link_to :Delete, tweet_path(), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
+        <%= link_to :Edit, edit_tweet_path(tweet), :class => "post-bottom-button" %>
+        <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
         <% end %>
       </div>
       <% end %>
