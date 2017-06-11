@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  
   def show
     @user = User.find(params[:id])
   end
@@ -10,12 +9,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.new(avatar_params)
-
     if @user.save
       redirect_to user_path(@user)
-    else render 'show'
+    else
+      render 'show'
+    end
   end
-end
+
   private
 
   def avatar_params

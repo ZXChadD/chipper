@@ -5,7 +5,6 @@ class LikesController < ApplicationController
 
     @like.count += 1
     redirect_to tweets_path
-    end
   end
 
 

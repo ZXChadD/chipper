@@ -9,18 +9,16 @@ class RepliesController < ApplicationController
   def create
     @reply = @tweet.replies.new(reply_params)
     @reply.user = current_user
-    if @reply.save!
-      redirect_to tweet_path(@tweet)
-    end
+    redirect_to tweet_path(@tweet) if @reply.save!
   end
 
   private
+
   def set_tweet
     @tweet = Tweet.find(params[:tweet_id])
   end
 
   def reply_params
-    params.require(:reply).permit(:body,:tweet_id)
+    params.require(:reply).permit(:body, :tweet_id)
   end
-
 end

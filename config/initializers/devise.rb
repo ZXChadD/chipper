@@ -280,6 +280,6 @@ Devise.setup do |config|
 
   config.scoped_views = true
 
-  config.reset_password_keys = [ :username ]
-  config.confirmation_keys = [ :username ]
+  config.reset_password_keys = [:username]
+  config.confirmation_keys = [:username]
 end

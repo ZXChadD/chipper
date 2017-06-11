@@ -1,11 +1,10 @@
 class AvatarUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-   storage :file
+  storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -36,24 +35,23 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-    version :thumb do
-     process :resize_to_fill => [100, 100]
-    end
+  version :thumb do
+    process resize_to_fill: [100, 100]
+  end
 
-    version :medium do
-      process :resize_to_fill => [300,300]
-    end
+  version :medium do
+    process resize_to_fill: [300, 300]
+  end
 
-    version :small do
-      process :resize_to_fill => [140,140]
-    end
-
+  version :small do
+    process resize_to_fill: [140, 140]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-   def extension_whitelist
-     %w(jpg jpeg gif png)
-   end
+  def extension_whitelist
+    %w[jpg jpeg gif png]
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
@@ -61,8 +59,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  def default_url(*args)
-    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default-avatar.jpeg"].compact.join('_'))
+  def default_url(*_args)
+    ActionController::Base.helpers.asset_path('fallback/' + [version_name, 'default-avatar.jpeg'].compact.join('_'))
   end
-
 end

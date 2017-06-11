@@ -8,16 +8,16 @@
 require 'faker'
 
 30.times do
-     User.create(
-        email: Faker::Internet.email,
-        password: 123456
-      )
+  User.create(
+    email: Faker::Internet.email,
+    password: 123456,
+    username: Faker::Name.first_name
+  )
 end
 
-
 100.times do
-     Tweet.create(
-        body: Faker::StarWars.quote,
-        user_id: Faker::Number.between(1, 30)
-      )
+  Tweet.create(
+    body: Faker::StarWars.quote,
+    user_id: Faker::Number.between(1, 30)
+  )
 end

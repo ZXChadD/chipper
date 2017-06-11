@@ -7,7 +7,7 @@
         "Quote of the Day"
       </div>
       <div class="card-block">
-        <span class="card-title"><%=link_to tweet.user.username, user_path(tweet.user.id)%>  says  <%= tweet.body %></span>
+        <span class="card-title">@<%=link_to tweet.user.username, user_path(tweet.user.id)%> : <%= tweet.body %></span>
         <% tweet.replies.each do |reply| %>
         <p class="card-text"><%= reply.user.email %> says <%= reply.body %></p>
         <% end %>
@@ -18,6 +18,8 @@
           <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
         <% end %>
         <%= link_to :Reply, new_tweet_reply_path(tweet), :class => "post-bottom-button" %>
+        <%= pluralize(tweet.likes.count, "like") %>
+        <%= button_to tweet.likes.count, upvote_tweet_path(tweet), method: :post, remote: true %>
       </div>
       <% end %>
     </div>

@@ -8,9 +8,9 @@ RSpec.describe RepliesController, type: :controller do
     let!(:tweet) { create(:tweet) }
 
     before do
-      get :new,  params: { tweet_id: tweet }
+      get :new, params: { tweet_id: tweet }
     end
 
-    it {expect(assigns(:reply)).to be_new_record}
+    it { expect(assigns(:reply)).to be_new_record }
   end
 end

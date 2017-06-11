@@ -1,14 +1,11 @@
 class TweetsController < ApplicationController
-  before_action :authenticate_user!, except: [:home, :index, :show]
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :upvote]
+  before_action :authenticate_user!, except: %i[home index show]
+  before_action :set_tweet, only: %i[show edit update destroy upvote]
 
-  def feed 
-  end
+  def feed; end
 
   def home
-    if user_signed_in?
-      redirect_to tweets_path
-    end
+    redirect_to tweets_path if user_signed_in?
   end
 
   def index
@@ -26,17 +23,16 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
 
-   respond_to do |format|
-     if @tweet.save
-       format.js
-     else
-       format.js
-     end
-   end
+    respond_to do |format|
+      if @tweet.save
+        format.js
+      else
+        format.js
+      end
+    end
  end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @tweet.update_attributes(tweet_params)
@@ -58,17 +54,18 @@ class TweetsController < ApplicationController
   def upvote
     @tweet = Tweet.find(params[:id])
     @like = @tweet.likes.create(user_id: current_user.id)
+    
     respond_to do |format|
       if @like.save
         format.js
       else
-        format.html { render action: "index" }
+        format.js { render action: 'index' }
       end
     end
   end
 
-
   private
+
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end
@@ -76,5 +73,4 @@ class TweetsController < ApplicationController
   def tweet_params
     params.require(:tweet).permit(:body)
   end
-
 end
