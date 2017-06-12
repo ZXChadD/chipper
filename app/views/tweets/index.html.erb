@@ -32,18 +32,21 @@
       </nav>
     </div>
   </div>
+
+
   <section class="stats">
      <%= render partial: 'shared/stats' %>
   </section>
+
+  <div id='tweet_index_container'>
+    <%= render partial: 'tweet_index'%>
+  </div>
+
 
   <div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
-
-          <div id="tweet_form_container">
-            <%= render partial: 'tweet_form'%>
-          </div>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div id="tweet_form_container">
@@ -51,42 +54,5 @@
             </div>
 
 
-  <div class="row">
-    <div class="col-sm-7">
-      <div class="card text-center">
-        <% @tweets.each do |tweet| %>
-        <div class="card-header">
-          "Quote of the Day"
-        </div>
-        <div class="card-block">
-          <p class="card-title"><%= tweet.body %></p>
-          <% tweet.replies.each do |reply| %>
-          <p class="card-text"><%= reply.body %></p>
-          <% end %>
-
-          <div class="likes">
-            <%= pluralize(tweet.likes.count, "like") %>
-            <%= button_to tweet.likes.count, upvote_tweet_path(tweet), method: :post, remote: true %>
-          </div>
-
-        <div class="card-footer text-muted">
-          <% if tweet.user == current_user %>
-          <%= link_to :Edit, edit_tweet_path(tweet), :class => "post-bottom-button" %>
-          <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
-          <% end %>
-          <%= link_to :Reply, new_tweet_reply_path(tweet), :class => "post-bottom-button" %>
-
-          <% end %>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id='tweet_index_container'>
-
-    <%= render partial: 'tweet_index'%>
-
-  </div>
 
 </div>
