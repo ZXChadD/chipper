@@ -10,7 +10,7 @@ require 'faker'
 30.times do
   User.create(
     email: Faker::Internet.email,
-    password: 123456,
+    password: 123_456,
     username: Faker::Name.first_name
   )
 end

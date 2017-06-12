@@ -24,6 +24,7 @@ gem 'devise'
 
 gem 'carrierwave'
 gem 'faker', '~> 1.6', '>= 1.6.3'
+gem 'filterrific'
 gem 'fog'
 gem 'jquery-rails'
 gem 'mini_magick'
@@ -59,8 +60,8 @@ end
 
 group :development do
   gem 'guard'
-  gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
+  gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'

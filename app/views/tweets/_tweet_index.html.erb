@@ -9,7 +9,7 @@
       <div class="card-block">
         <span class="card-title">@<%=link_to tweet.user.username, user_path(tweet.user.id)%> : <%= tweet.body %></span>
         <% tweet.replies.each do |reply| %>
-        <p class="card-text"><%= reply.user.email %> says <%= reply.body %></p>
+        <p class="card-text">@<%= reply.user.username %> : <%= reply.body %></p>
         <% end %>
       </div>
       <div class="card-footer text-muted">

@@ -9,7 +9,7 @@ class RepliesController < ApplicationController
   def create
     @reply = @tweet.replies.new(reply_params)
     @reply.user = current_user
-    redirect_to tweet_path(@tweet) if @reply.save!
+    redirect_to tweets_path if @reply.save!
   end
 
   private
