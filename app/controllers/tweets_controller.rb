@@ -2,7 +2,8 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!, except: %i[home index show]
   before_action :set_tweet, only: %i[show edit update destroy upvote]
 
-  def feed; end
+  def feed
+  end
 
   def home
     redirect_to tweets_path if user_signed_in?
@@ -54,7 +55,7 @@ class TweetsController < ApplicationController
   def upvote
     @tweet = Tweet.find(params[:id])
     @like = @tweet.likes.create(user_id: current_user.id)
-    
+
     respond_to do |format|
       if @like.save
         format.js
