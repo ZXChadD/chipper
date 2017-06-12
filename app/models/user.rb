@@ -24,8 +24,8 @@ class User < ApplicationRecord
   has_many :replies, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :replies, dependent: :destroy
-  has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
-  has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy, source: :followed
+  has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy, source: :follower
 
 
   def follow(other)
@@ -37,7 +37,11 @@ class User < ApplicationRecord
   end
 
   def following?(other)
-    following.include?(other)
+    if following.find_by(followed_id: other.id).nil?
+      return false
+    else
+      return true
+    end
   end
 
   def self.from_omniauth(auth)
