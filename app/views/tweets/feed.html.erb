@@ -4,14 +4,14 @@
     <div class="card text-center">
 
 
-      <% current_user.following.pluck(:id).each do |id| %>
-        <% User.find(id).tweets.pluck(:body).each do |t|%>
+      <% current_user.following.pluck(:followed_id).each do |id| %>
+        <% User.find(id).tweets.order('created_at DESC').pluck(:body).each do |t|%>
 
         <div class="card-header">
           "Quote of the Day"
         </div>
         <div class="card-block">
-          <span class="card-title"><%= User.find(id).email %> says <%= t %></span>
+          <span class="card-title"><%= User.find(id).username %> says <%= t %></span>
         </div>
 
         <% end %>

@@ -9,12 +9,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook], authentication_keys: [:login]
 
   # Username Validation
-  validates :username, presence: true, uniqueness: { case_sensitive: true }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
 
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
 
   # Email Validation
-  validates :email, presence: true, uniqueness: { case_sensitive: true }
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   # User Avatar Validation
   validates_integrity_of :avatar
@@ -24,8 +24,8 @@ class User < ApplicationRecord
   has_many :replies, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :replies, dependent: :destroy
-  has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
-  has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy, source: :followed
+  has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy, source: :follower
 
 
   def follow(other)
@@ -37,7 +37,11 @@ class User < ApplicationRecord
   end
 
   def following?(other)
-    following.include?(other)
+    if following.find_by(followed_id: other.id).nil?
+      return false
+    else
+      return true
+    end
   end
 
   def self.from_omniauth(auth)

@@ -10,8 +10,8 @@
       <%= render 'shared/stats' %>
       <% if @users.any? %>
         <div class="user_avatars">
-          <% @users.each do |user| %>
-            <%= link_to user.username %>
+          <% @users.pluck(:followed_id).each do |id| %>
+            <%= link_to User.find(id).username %>
           <% end %>
         </div>
       <% end %>
@@ -21,11 +21,10 @@
     <h3><%= @title %></h3>
     <% if @users.any? %>
       <ul class="users follow">
-        <% @users.each do |user| %>
-          <%= user.username %>
+        <% @users.pluck(:followed_id).each do |id| %>
+          <%= link_to User.find(id).username %>
         <% end %>
       </ul>
-      <%= will_paginate %>
     <% end %>
   </div>
 </div>

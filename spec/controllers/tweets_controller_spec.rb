@@ -4,6 +4,10 @@ RSpec.describe TweetsController, type: :controller do
   let(:user) { create(:user) }
   before { sign_in user }
 
+  describe 'GET #home' do
+    it { expect(response).to be_successful }
+  end
+
   describe 'GET #index' do
     let!(:tweets) { create_list(:tweet, 1, user: user) }
     before do
@@ -26,12 +30,12 @@ RSpec.describe TweetsController, type: :controller do
     before do
       post :create, xhr: true, params: { tweet: attributes }
     end
-    context 'when user save passes' do
+    context 'when user create passes' do
       let(:attributes) { attributes_for(:tweet) }
       it { expect(response).to render_template(:create) }
     end
 
-    context 'when user save fails' do
+    context 'when user create fails' do
       let(:attributes) { attributes_for(:tweet, :invalid) }
       it { expect(response).to render_template(:create) }
     end
@@ -58,5 +62,16 @@ RSpec.describe TweetsController, type: :controller do
       tweet.reload
       expect(response).to render_template(:edit)
     end
+  end
+
+  describe 'POST #upvote' do
+    let!(:tweet){ create(:tweet) }
+    before do
+      post :upvote, params: {}
+
+    it 'when user create a new like' do
+      post :upvote
+    end
+
   end
 end
