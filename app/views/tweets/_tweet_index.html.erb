@@ -7,7 +7,8 @@
         "Quote of the Day"
       </div>
       <div class="card-block">
-        <span class="card-title">@<%=link_to tweet.user.username, user_path(tweet.user.id)%> : <%= tweet.body %></span>
+        <span class="card-title"><%= image_tag tweet.user.avatar, class: "img-thumbnail" %> @<%=link_to tweet.user.username, user_path(tweet.user.id)%> : <%= tweet.body %></span>
+        <p><%= tweet.all_tags %></p>
         <% tweet.replies.each do |reply| %>
         <p class="card-text">@<%= reply.user.username %> : <%= reply.body %></p>
         <% end %>

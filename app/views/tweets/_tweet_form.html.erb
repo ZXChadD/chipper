@@ -5,6 +5,8 @@
       <h3>Compose New Chipper</h3>
       <%= f.text_area :body %>
       <br>
+      <%= f.label :all_tags %>
+      <%= f.text_field :all_tags %>
       <%= f.submit 'Chipper away' %>
       <button type='button' id='cancel-button' data-dismiss='modal' aria-label='Close'><%= link_to 'Cancel', tweets_path %></button>
       <% end %>
