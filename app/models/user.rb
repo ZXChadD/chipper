@@ -26,7 +26,7 @@ class User < ApplicationRecord
   has_many :replies, dependent: :destroy
   has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy, source: :followed
   has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy, source: :follower
-
+  has_many :notifications, foreign_key: 'recipient_id'
 
   def follow(other)
     following << other

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :relationships, only: %i[create destroy]
 
+  get 'notifications/:id/link_through', to: 'notifications#link_through',
+                                        as: :link_through
+
   resources :tweets do
     member do
       post 'upvote'
@@ -22,6 +25,8 @@ Rails.application.routes.draw do
       get 'feed'
     end
   end
+
+  resources :notifications
 
   resources :admin
 

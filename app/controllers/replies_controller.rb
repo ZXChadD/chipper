@@ -9,8 +9,13 @@ class RepliesController < ApplicationController
   def create
     @reply = @tweet.replies.new(reply_params)
     @reply.user = current_user
-    redirect_to tweets_path if @reply.save!
+    if @reply.save!
+    create_notification
+    redirect_to tweets_path
+    end
   end
+
+
 
   private
 
@@ -21,4 +26,12 @@ class RepliesController < ApplicationController
   def reply_params
     params.require(:reply).permit(:body, :tweet_id)
   end
+
+  def create_notification
+    @users = User.all
+    (@users.uniq - [current_user]).each do |user|
+    Notification.create(recipient: user, actor: current_user, action: "posted", notifiable: @reply)
+    end
+  end
+
 end
