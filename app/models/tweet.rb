@@ -6,4 +6,5 @@ class Tweet < ApplicationRecord
   has_many :tags, through: :tweet_tags
 
   validates :body, presence: true
+
 end
