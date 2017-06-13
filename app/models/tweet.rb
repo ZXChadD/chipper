@@ -20,4 +20,8 @@ class Tweet < ApplicationRecord
   def all_tags
     tags.map(&:name).join(', ')
   end
+
+  def self.search(search)
+    where('body ILike ?', "%#{search}%")
+  end
 end

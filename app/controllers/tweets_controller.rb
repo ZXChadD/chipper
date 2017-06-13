@@ -13,6 +13,16 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
     @tweets = Tweet.all.order('created_at DESC')
     @user = current_user
+    if params[:id]
+      @tweets = Tweet.tagged_with(params[:tag])
+    else
+      @tweets = Tweet.all.order('created_at DESC')
+    end
+    if params[:search]
+      @tweets = Tweet.search(params[:search]).order('created_at DESC')
+    else
+      @tweets = Tweet.all.order('created_at DESC')
+    end
   end
 
   # def new
