@@ -24,16 +24,16 @@ class User < ApplicationRecord
   has_many :replies, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :replies, dependent: :destroy
-  has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy, source: :followed
-  has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy, source: :follower
-  has_many :notifications, foreign_key: 'recipient_id'
+
+  has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
 
   def follow(other)
-    following << other
+    following.create!(followed: other)
   end
 
   def unfollow(other)
-    following.destroy(other)
+    following.find_by(followed: other).destroy
   end
 
   def following?(other)

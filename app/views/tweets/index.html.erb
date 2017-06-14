@@ -45,6 +45,12 @@
     </div>
   </div>
 
+  <%= form_tag tweets_path, method: :get do %>
+    <p>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+      <%= submit_tag 'Search', :name => nil %>
+    </p>
+  <% end %>
 
   <section class="stats">
      <%= render partial: 'shared/stats' %>
