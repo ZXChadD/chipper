@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170613084639) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "read", default: false
-  end 
+  end
 
   create_table "relationships", force: :cascade do |t|
     t.bigint "follower_id", null: false
@@ -64,15 +64,12 @@ ActiveRecord::Schema.define(version: 20170613084639) do
   end
 
   create_table "tweet_tags", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "tweet_id", null: false
     t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_tweet_tags_on_tag_id"
     t.index ["tweet_id"], name: "index_tweet_tags_on_tweet_id"
-
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -110,9 +107,7 @@ ActiveRecord::Schema.define(version: 20170613084639) do
   add_foreign_key "likes", "users"
   add_foreign_key "replies", "tweets"
   add_foreign_key "replies", "users"
-
   add_foreign_key "tweet_tags", "tags"
   add_foreign_key "tweet_tags", "tweets"
-
   add_foreign_key "tweets", "users"
 end

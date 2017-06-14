@@ -30,7 +30,7 @@ class RepliesController < ApplicationController
   def create_notification
     @users = User.all
     (@users.uniq - [current_user]).each do |user|
-    Notification.create(recipient: user, actor: current_user, action: "posted", notifiable: @reply)
+    Notification.create(recipient: user, actor: current_user, action: "replied", notifiable: @reply)
     end
   end
 
