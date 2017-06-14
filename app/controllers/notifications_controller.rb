@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
   def link_through
     @notification = Notification.find(params[:id])
     @notification.update read: true
-    redirect_to tweets_path @notication.tweet 
+    redirect_to tweets_path(@notification)
   end
 
 end

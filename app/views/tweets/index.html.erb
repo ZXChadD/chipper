@@ -19,13 +19,14 @@
             <li class="dropdown notification-dropdown"></li>
                <button class="btn btn-default dropdown-toggle" type='button', id='dropdownMenu1', data-toggle= 'dropdown'aria-haspopup= "true",aria-expanded = "true">
                <span class="glyphicon glyphicon-flag"></span>
-               <%= current_user.notifications.count %></button>
+               <%= current_user.notifications.where(read: false).count %></button>
                 <ul class="dropdown-menu" aria-labelledby= 'dropdownMenu1'>
                <li class="dropdown-header text-center">Notifications</li>
                 <li class="dropdown-header text-center">
                   <% current_user.notifications.all.each do |notification| %>
-                  <%= User.find(notification.actor_id).username%> has <%=notification.notifiable_type.downcase %> your tweet
-                  <%= link_to "notification", link_through_path(notification) %>
+                  <% if notification.read == false %>
+                  <%= link_to "#{User.find(notification.actor_id).username} has #{notification.notifiable_type.downcase} your tweet",link_through_path(notification) %>
+                  <% end %>
                   <% end %>
              </ul>
               <%= link_to edit_user_registration_path do%>
