@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :tweets do
     member do
       post 'upvote'
+      get 'retweet'
     end
     resources :replies
     collection do

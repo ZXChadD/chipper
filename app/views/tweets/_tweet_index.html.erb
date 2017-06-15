@@ -12,6 +12,7 @@
         <% tweet.replies.each do |reply| %>
         <p class="card-text">@<%= reply.user.username %> : <%= reply.body %></p>
         <% end %>
+        <%= link_to "Retweet", retweet_tweet_path(tweet) %>
       </div>
       <div class="card-footer text-muted">
         <% if tweet.user == current_user %>

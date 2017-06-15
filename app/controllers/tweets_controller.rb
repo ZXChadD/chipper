@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, except: %i[home index show]
-  before_action :set_tweet, only: %i[show edit update destroy upvote]
+  before_action :set_tweet, only: %i[show edit update destroy upvote retweet]
 
   def feed
   end
@@ -63,7 +63,6 @@ class TweetsController < ApplicationController
   end
 
   def upvote
-    @tweet = Tweet.find(params[:id])
     @like = @tweet.likes.create(user_id: current_user.id)
 
     respond_to do |format|
@@ -72,6 +71,21 @@ class TweetsController < ApplicationController
       else
         format.js { render action: 'index' }
       end
+    end
+  end
+
+  def retweet
+    if @tweet
+      @retweet = current_user.tweets.build(body: @tweet.body, user_id: @tweet.user_id)
+        if @retweet.save
+          redirect_to tweet_path(@retweet)
+          flash[:success] = "Retweet Successful!"
+        else
+          redirect_to user_path(current_user), notice: @retweet.errors.full_messages
+        end
+    else
+      redirect_back_or current_user
+      flash[:error] = "Retweet error!"
     end
   end
 
