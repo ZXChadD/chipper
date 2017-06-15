@@ -14,8 +14,6 @@ class RepliesController < ApplicationController
     end
   end
 
-
-
   private
 
   def set_tweet
