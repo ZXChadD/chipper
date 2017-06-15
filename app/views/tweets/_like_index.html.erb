@@ -1,2 +1,0 @@
-<%= pluralize(@tweet.likes.count, "like") %>
-<%= button_to @tweet.likes.count, upvote_tweet_path(@tweet), method: :post, remote: true %>

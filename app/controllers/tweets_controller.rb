@@ -10,19 +10,20 @@ class TweetsController < ApplicationController
   end
 
   def index
+    @reply = Reply.new
     @tweet = Tweet.new
     @tweets = Tweet.all.order('created_at DESC')
     @user = current_user
-    if params[:id]
+    if params[:tag]
       @tweets = Tweet.tagged_with(params[:tag])
     else
       @tweets = Tweet.all.order('created_at DESC')
     end
-    if params[:search]
-      @tweets = Tweet.search(params[:search]).order('created_at DESC')
-    else
-      @tweets = Tweet.all.order('created_at DESC')
-    end
+    # if params[:search]
+    #   @tweets = Tweet.search(params[:search]).order('created_at DESC')
+    # else
+    #   @tweets = Tweet.all.order('created_at DESC')
+    # end
   end
 
   # def new
@@ -63,6 +64,10 @@ class TweetsController < ApplicationController
   end
 
   def upvote
+
+    @reply = Reply.new
+    @tweets = Tweet.all.order('created_at DESC')
+    @tweet = Tweet.find(params[:id])
     @like = @tweet.likes.create(user_id: current_user.id)
 
     respond_to do |format|
