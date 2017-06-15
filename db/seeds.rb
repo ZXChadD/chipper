@@ -11,7 +11,8 @@ require 'faker'
   User.create(
     email: Faker::Internet.email,
     password: 123_456,
-    username: Faker::Name.first_name
+    username: Faker::Name.first_name,
+    avatar: UiFaces.face
   )
 end
 

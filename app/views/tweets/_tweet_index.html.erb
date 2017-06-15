@@ -23,6 +23,19 @@
         <%= pluralize(tweet.likes.count, "like") %>
         <%= button_to tweet.likes.count, upvote_tweet_path(tweet), method: :post, remote: true %>
       </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3" id="chipper-box">
+            <h3>Reply</h3>
+            <%= form_for @reply, :url => tweet_replies_path(tweet) do |f| %>
+            <%= f.text_field :body %>
+            <br>
+            <%= f.submit "Submit" %>
+            <%= link_to "Cancel", tweets_path, :id => 'cancel-button' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
       <% end %>
     </div>
   </div>
