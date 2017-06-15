@@ -10,6 +10,7 @@ class TweetsController < ApplicationController
   end
 
   def index
+    @reply = Reply.new
     @tweet = Tweet.new
     @tweets = Tweet.all.order('created_at DESC')
     @user = current_user
@@ -69,6 +70,8 @@ class TweetsController < ApplicationController
   end
 
   def upvote
+    @reply = Reply.new
+
     @tweets = Tweet.all.order('created_at DESC')
     @tweet = Tweet.find(params[:id])
     @like = @tweet.likes.create(user_id: current_user.id)

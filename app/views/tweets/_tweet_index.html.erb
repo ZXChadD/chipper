@@ -19,9 +19,35 @@
           <%= link_to :Edit, edit_tweet_path(tweet), :class => "post-bottom-button" %>
           <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
         <% end %>
-        <%= link_to :Reply, new_tweet_reply_path(tweet), :class => "post-bottom-button" %>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myReply">
+          <%= link_to :Reply, new_tweet_reply_path(tweet), remote: true %>
+        </button>
         <%= pluralize(tweet.likes.count, "like") %>
         <%= button_to tweet.likes.count, upvote_tweet_path(tweet), method: :post, remote: true %>
+      </div>
+
+      <div class="modal fade" id="myReply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div id="tweet_form_container">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6" id="chipper-box">
+                      <h3>Reply</h3>
+                      <%= form_for @reply, url: tweet_replies_path(tweet) do |f| %>
+                      <%= f.text_field :body %>
+                      <br>
+                      <%= f.submit "Submit" %>
+                      <%= link_to "Cancel", tweets_path, :id => 'cancel-button' %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <% end %>
     </div>

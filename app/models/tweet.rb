@@ -8,7 +8,7 @@ class Tweet < ApplicationRecord
   validates :body, presence: true
 
   def self.tagged_with(name)
-    Tag.find_by!(name: name).tweets
+    Tag.find_by(name: name).tweets
   end
 
   def all_tags=(names)

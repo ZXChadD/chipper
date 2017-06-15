@@ -117,8 +117,10 @@ ActiveRecord::Schema.define(version: 20170614050955) do
   add_foreign_key "likes", "users"
   add_foreign_key "replies", "tweets"
   add_foreign_key "replies", "users"
+
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
+
   add_foreign_key "tweet_tags", "tags"
   add_foreign_key "tweet_tags", "tweets"
   add_foreign_key "tweets", "users"

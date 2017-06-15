@@ -3,7 +3,6 @@ class RepliesController < ApplicationController
   before_action :set_tweet
 
   def new
-    @reply = Reply.new
   end
 
   def create
@@ -14,8 +13,6 @@ class RepliesController < ApplicationController
     redirect_to tweets_path
     end
   end
-
-
 
   private
 
