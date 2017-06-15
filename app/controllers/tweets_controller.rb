@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, except: %i[home index show]
-  before_action :set_tweet, only: %i[show edit update destroy upvote retweet]
+  before_action :set_tweet, only: %i[show edit update destroy retweet]
 
   def feed
   end
@@ -13,16 +13,16 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
     @tweets = Tweet.all.order('created_at DESC')
     @user = current_user
-    if params[:id]
+    if params[:tag]
       @tweets = Tweet.tagged_with(params[:tag])
     else
       @tweets = Tweet.all.order('created_at DESC')
     end
-    if params[:search]
-      @tweets = Tweet.search(params[:search]).order('created_at DESC')
-    else
-      @tweets = Tweet.all.order('created_at DESC')
-    end
+    # if params[:search]
+    #   @tweets = Tweet.search(params[:search]).order('created_at DESC')
+    # else
+    #   @tweets = Tweet.all.order('created_at DESC')
+    # end
   end
 
   # def new
@@ -33,6 +33,12 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all.order('created_at DESC')
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
+
+    # if @tweet.save
+    #   redirect_to tweets_path(@tweet)
+    # else
+    #   render root_path
+    # end
 
     respond_to do |format|
       if @tweet.save
@@ -59,10 +65,12 @@ class TweetsController < ApplicationController
 
   def destroy
     @tweet.destroy!
-    redirect_to tweets_path
+    redirect_to tweets_path(@tweet)
   end
 
   def upvote
+    @tweets = Tweet.all.order('created_at DESC')
+    @tweet = Tweet.find(params[:id])
     @like = @tweet.likes.create(user_id: current_user.id)
 
     respond_to do |format|
