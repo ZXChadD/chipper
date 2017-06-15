@@ -8,10 +8,11 @@
       </div>
       <div class="card-block">
         <span class="card-title"><%= image_tag tweet.user.avatar, class: "img-thumbnail" %> @<%=link_to tweet.user.username, user_path(tweet.user.id)%> : <%= tweet.body %></span>
-        <p><%= tweet.all_tags %></p>
+        <p><%= raw tag_links(tweet.all_tags) %></p>
         <% tweet.replies.each do |reply| %>
         <p class="card-text">@<%= reply.user.username %> : <%= reply.body %></p>
         <% end %>
+        <%= link_to "Retweet", retweet_tweet_path(tweet) %>
       </div>
       <div class="card-footer text-muted">
         <% if tweet.user == current_user %>

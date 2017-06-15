@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613084639) do
+ActiveRecord::Schema.define(version: 20170614050955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170613084639) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "read", default: false
-  end 
+  end
 
   create_table "relationships", force: :cascade do |t|
     t.bigint "follower_id", null: false
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20170613084639) do
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
+  create_table "retweets", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "tweet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_retweets_on_tweet_id"
+    t.index ["user_id"], name: "index_retweets_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -64,15 +74,12 @@ ActiveRecord::Schema.define(version: 20170613084639) do
   end
 
   create_table "tweet_tags", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "tweet_id", null: false
     t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_tweet_tags_on_tag_id"
     t.index ["tweet_id"], name: "index_tweet_tags_on_tweet_id"
-
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -110,9 +117,9 @@ ActiveRecord::Schema.define(version: 20170613084639) do
   add_foreign_key "likes", "users"
   add_foreign_key "replies", "tweets"
   add_foreign_key "replies", "users"
-
+  add_foreign_key "retweets", "tweets"
+  add_foreign_key "retweets", "users"
   add_foreign_key "tweet_tags", "tags"
   add_foreign_key "tweet_tags", "tweets"
-
   add_foreign_key "tweets", "users"
 end

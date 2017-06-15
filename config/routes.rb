@@ -16,9 +16,12 @@ Rails.application.routes.draw do
   get 'notifications/:id/link_through', to: 'notifications#link_through',
                                         as: :link_through
 
+  get 'tags/:tag', to: 'tweets#index', as: "tag"
+
   resources :tweets do
     member do
       post 'upvote'
+      get 'retweet'
     end
     resources :replies
     collection do
