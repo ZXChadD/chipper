@@ -12,8 +12,9 @@ class TweetsController < ApplicationController
   def index
     @reply = Reply.new
     @tweet = Tweet.new
-    @tweets = Tweet.all.order('created_at DESC')
-    @user = current_user
+    @tweets = Tweet.paginate(:page => params[:page], :per_page => 8)
+    @tweet.user = current_user
+
     if params[:tag]
       @tweets = Tweet.tagged_with(params[:tag])
     else
@@ -34,21 +35,20 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all.order('created_at DESC')
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
-
-    # if @tweet.save
-    #   redirect_to tweets_path(@tweet)
-    # else
-    #   render root_path
-    # end
-
-    respond_to do |format|
-      if @tweet.save
-        format.js
-      else
-        format.js
-      end
+    if @tweet.save
+      redirect_to tweets_path(@tweet)
+    else
+      render root_path
     end
- end
+    #
+    # respond_to do |format|
+    #   if @tweet.save
+    #     format.js
+    #   else
+    #     format.js
+    #   end
+    # end
+  end
 
   def edit; end
 
@@ -71,7 +71,6 @@ class TweetsController < ApplicationController
 
   def upvote
     @reply = Reply.new
-
     @tweets = Tweet.all.order('created_at DESC')
     @tweet = Tweet.find(params[:id])
     @like = @tweet.likes.create(user_id: current_user.id)

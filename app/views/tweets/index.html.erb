@@ -5,10 +5,9 @@
           </div>
           <ul class='nav navbar-nav'>
             <li><%= link_to :Home, tweets_path %></li>
-            <li><%= link_to 'Profile Page', user_path(@user) %></li>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myTweet">
-              <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', remote: true %></li>
-            </button>
+            <li><%= link_to 'Profile Page' %></li>
+
+              <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', "data-toggle" => "modal", "data-target" => "#myTweet", remote: true %></li>
             <li><%= link_to 'Feed', feed_tweets_path %></li>
           </ul>
 
@@ -58,9 +57,11 @@
   <section class="stats">
      <%= render partial: 'shared/stats' %>
   </section>
-
-  <div id='tweet_index_container'>
-    <%= render partial: 'tweet_index'%>
+  
+  <div class="col-sm-6 col-sm-offset-3">
+    <div id='tweet_index_container'>
+      <%= render partial: 'tweet_index'%>
+    </div>
   </div>
 
   <div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

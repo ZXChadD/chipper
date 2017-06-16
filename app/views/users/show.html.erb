@@ -1,21 +1,32 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= image_tag @user.avatar, :class => 'profile-pic' %>
+    <h1><%= @user.username %></h1>
+  </div>
+</div>
 
 
-<%= image_tag @user.avatar, :class => 'profile-pic' %>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <section class="stats_follow">
+      <%= render partial: 'shared/stats' %>
+    </section>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-sm-2 col-sm-offset-5">
+    <section>
+      <%= render partial: 'shared/follow_form' %>
+      <%= link_to "Back", tweets_path, class: "post-bottom-button" %>
+    </section>
+  </div>
+</div>
 
-<h1><%= @user.username %></h1>
-
-<section class="stats">
-  <%= render partial: 'shared/stats' %>
-</section>
-
-<section>
-  <%= render partial: 'shared/follow_form' %>
-</section>
 
 <div class='row'>
 
-  <div class="col-sm-7">
+  <div class="col-sm-6 col-sm-offset-3">
     <div class="card text-center">
       <% @user.tweets.each do |tweet| %>
       <div class="card-header">
@@ -23,13 +34,46 @@
       </div>
       <div class="card-block">
         <span class="card-title"><%= tweet.body %></span>
+        <hr>
+        <p>
+          Tags:
+          <span class='glyphicon glyphicon-tag'><%= raw tag_links(tweet.all_tags)%></span>
+        </p>
+        <hr>
+
+        <% tweet.replies.each do |reply| %>
+        <p class="card-text">@<%= reply.user.username %> : <%= reply.body %></p>
+        <% end %>
+
+        <br>
+
+        <% if tweet.user == current_user %>
+        <div class ="left-footer">
+          <%= link_to new_tweet_reply_path(tweet), "data-toggle" => "modal", "data-target" => "#myReply", remote: true do%>
+          <span class='glyphicon glyphicon-share-alt'></span>Reply
+          <% end %>
+          <%= link_to retweet_tweet_path(tweet) do%>
+          <span class='glyphicon glyphicon-repeat'></span>Retweet
+          <% end %>
+        </div>
+
+        <div class="right-footer">
+          <%= link_to edit_tweet_path(tweet) do%>
+          <span class='glyphicon glyphicon-pencil'></span>Edit
+          <% end %>
+          <%= link_to tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } do%>
+          <span class='glyphicon glyphicon-trash'></span>Delete
+          <% end %>
+        </div>
+        <% end %>
+
+        <%= pluralize(tweet.likes.count, "like") %>
+        <%= button_to upvote_tweet_path(tweet), method: :post, remote: true do%>
+        <span class='glyphicon glyphicon-thumbs-up'></span>
+        <% end %>
       </div>
 
       <div class="card-footer text-muted">
-        <% if @user == current_user %>
-        <%= link_to :Edit, edit_tweet_path(tweet), :class => "post-bottom-button" %>
-        <%= link_to :Delete, tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, :class => "post-bottom-button" %>
-        <% end %>
       </div>
       <% end %>
 
