@@ -49,26 +49,26 @@
 
         <% if tweet.user == current_user %>
         <div class ="left-footer">
-          <%= link_to new_tweet_reply_path(tweet), "data-toggle" => "modal", "data-target" => "#myReply", remote: true do%>
+          <%= link_to new_tweet_reply_path(tweet), "data-toggle" => "modal", "data-target" => "#myReply", remote: true, class: "post-bottom-button" do%>
           <span class='glyphicon glyphicon-share-alt'></span>Reply
           <% end %>
-          <%= link_to retweet_tweet_path(tweet) do%>
+          <%= link_to retweet_tweet_path(tweet), class:"post-bottom-button" do%>
           <span class='glyphicon glyphicon-repeat'></span>Retweet
           <% end %>
         </div>
 
         <div class="right-footer">
-          <%= link_to edit_tweet_path(tweet) do%>
+          <%= link_to edit_tweet_path(tweet), class:"post-bottom-button" do%>
           <span class='glyphicon glyphicon-pencil'></span>Edit
           <% end %>
-          <%= link_to tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } do%>
+          <%= link_to tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" }, class:"post-bottom-button" do%>
           <span class='glyphicon glyphicon-trash'></span>Delete
           <% end %>
         </div>
         <% end %>
 
         <%= pluralize(tweet.likes.count, "like") %>
-        <%= button_to upvote_tweet_path(tweet), method: :post, remote: true do%>
+        <%= button_to upvote_tweet_path(tweet), method: :post, remote: true, class:"post-bottom-button" do%>
         <span class='glyphicon glyphicon-thumbs-up'></span>
         <% end %>
       </div>

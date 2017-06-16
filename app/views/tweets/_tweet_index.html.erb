@@ -17,29 +17,23 @@
         <br>
 
         <% if tweet.user == current_user %>
-        <div class ="left-footer">
-          <%= link_to new_tweet_reply_path(tweet), "data-toggle" => "modal", "data-target" => "#myReply", remote: true do%>
+        <div class ="right-index-footer">
+          <%= link_to new_tweet_reply_path(tweet), "data-toggle" => "modal", "data-target" => "#myReply", remote: true, class:"post-bottom-button", id: "reply-button" do%>
           <span class='glyphicon glyphicon-share-alt'></span>Reply
           <% end %>
-          <%= link_to retweet_tweet_path(tweet) do%>
+          <%= link_to retweet_tweet_path(tweet), class: "post-bottom-button",id: "retweet-button" do%>
           <span class='glyphicon glyphicon-repeat'></span>Retweet
           <% end %>
         </div>
+        <% end %>
 
-        <div class="right-footer">
-          <%= link_to edit_tweet_path(tweet) do%>
-          <span class='glyphicon glyphicon-pencil'></span>Edit
-          <% end %>
-          <%= link_to tweet_path(tweet), method: :delete, data:{ confirm: "Are you sure?" } do%>
-          <span class='glyphicon glyphicon-trash'></span>Delete
+        <div class="like-footer">
+          <%= pluralize(tweet.likes.count, "like") %>
+          <br>
+          <%= link_to upvote_tweet_path(tweet), method: :post, remote: true, class: "post-bottom-button" do%>
+          <span class='glyphicon glyphicon-thumbs-up'></span>
           <% end %>
         </div>
-        <% end %>
-
-        <%= pluralize(tweet.likes.count, "like") %>
-        <%= button_to upvote_tweet_path(tweet), method: :post, remote: true do%>
-        <span class='glyphicon glyphicon-thumbs-up'></span>
-        <% end %>
       </div>
       <div class="card-footer text-muted">
         <% tweet.replies.each do |reply| %>
@@ -47,24 +41,20 @@
         <% end %>
       </div>
 
-
-
       <div class="modal fade" id="myReply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-body">
-              <div id="tweet_form_container">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-sm-6" id="chipper-box">
-                      <h3>Reply</h3>
-                      <%= form_for @reply, url: tweet_replies_path(tweet) do |f| %>
-                      <%= f.text_field :body %>
-                      <br>
-                      <%= f.submit "Submit" %>
-                      <%= link_to "Cancel", tweets_path, :id => 'cancel-button' %>
-                      <% end %>
-                    </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-5" id="chipper-reply-box">
+                    <h3>Reply</h3>
+                    <%= form_for @reply, url: tweet_replies_path(tweet) do |f| %>
+                    <%= f.text_area :body %>
+                    <br>
+                    <%= f.submit "Submit" %>
+                    <%= link_to "Cancel", tweets_path, :id => 'cancel-button' %>
+                    <% end %>
                   </div>
                 </div>
               </div>

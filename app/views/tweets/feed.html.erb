@@ -1,54 +1,14 @@
-<div class='container', id = 'landing_page'>
-  <div class='row'>
-    <div class='col-sm-12'>
-      <nav class='navbar fixed-top navbar-toggleable-md scrolling-navar' id='top-navbar'>
-        <div class='container'>
-          <div class='navbar-header'>
-            <%= image_tag 'chipper-icon.png', :class => 'logo' %>
-          </div>
-          <ul class='nav navbar-nav'>
-            <li><%= link_to :Home, tweets_path %></li>
-            <li><%= link_to 'Profile Page', user_path(@user) %></li>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myTweet">
-              <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', remote: true %></li>
-            </button>
-            <li><%= link_to 'Feed', feed_tweets_path %></li>
-          </ul>
-          <ul class='nav navbar-nav navbar-right'>
-            <% if user_signed_in? %>
-            <li class="dropdown notification-dropdown"></li>
-               <button class="btn btn-default dropdown-toggle" type='button', id='dropdownMenu1', data-toggle= 'dropdown'aria-haspopup= "true",aria-expanded = "true">
-               <span class="glyphicon glyphicon-flag"></span>
-               <%= current_user.notifications.where(read: false).count %></button>
-                <ul class="dropdown-menu" aria-labelledby= 'dropdownMenu1'>
-               <li class="dropdown-header text-center">Notifications</li>
-                <li class="dropdown-header text-center">
-                  <% current_user.notifications.all.each do |notification| %>
-                  <% if notification.read == false %>
-                  <%= link_to "#{User.find(notification.actor_id).username} has #{notification.notifiable_type.downcase} your tweet",link_through_path(notification) %>
-                  <% end %>
-                  <% end %>
-             </ul>
-              <%= link_to edit_user_registration_path do%>
-              <span class='glyphicon glyphicon-user'></span>Edit Profile
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do%>
-              <span class='glyphicon glyphicon-log-in'></span>Log Out
-              <% end %>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
+
+
+
+
 
 <div class='row'>
 
-  <div class="col-sm-7">
+  <div class="col-sm-6 col-sm-offset-3">
     <div class="card text-center">
+
+
 
 
       <% current_user.following.pluck(:followed_id).each do |id| %>
@@ -58,11 +18,12 @@
           "Quote of the Day"
         </div>
         <div class="card-block">
-          <span class="card-title"><%= User.find(id).username %> says <%= t %></span>
+          <span class="card-title"><%= image_tag User.find(id).avatar, class: "img-thumbnail" %><%= User.find(id).username %> : <%= t %></span>
         </div>
 
         <% end %>
       <% end %>
+      <%= link_to "Back", tweets_path, class: 'post-bottom-button'%>
 
     </div>
   </div>

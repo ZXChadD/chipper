@@ -204,5 +204,18 @@ $primary: #5a4dd6;
 
 .right-footer {
   text-align: right;
+}
 
+#retweet-button {
+  text-align: right;
+}
+
+#reply-button {
+  text-align: left;
+  position: relative;
+}
+.like-footer {
+  text-align: center;
+  position: relative;
+  margin-top: 10px;
 }

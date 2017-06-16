@@ -13,7 +13,7 @@ class TweetsController < ApplicationController
     @reply = Reply.new
     @tweet = Tweet.new
     @tweets = Tweet.paginate(:page => params[:page], :per_page => 8)
-    @tweet.user = current_user
+    @user = current_user
 
     if params[:tag]
       @tweets = Tweet.tagged_with(params[:tag])

@@ -5,7 +5,7 @@
           </div>
           <ul class='nav navbar-nav'>
             <li><%= link_to :Home, tweets_path %></li>
-            <li><%= link_to 'Profile Page' %></li>
+            <li><%= link_to 'Profile Page', user_path(@user) %></li>
 
               <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', "data-toggle" => "modal", "data-target" => "#myTweet", remote: true %></li>
             <li><%= link_to 'Feed', feed_tweets_path %></li>
@@ -47,17 +47,17 @@
       </nav>
 
 
-  <%= form_tag tweets_path, method: :get do %>
+  <!-- <%= form_tag tweets_path, method: :get do %>
     <p>
       <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
       <%= submit_tag 'Search', :name => nil %>
     </p>
-  <% end %>
+  <% end %> -->
 
   <section class="stats">
      <%= render partial: 'shared/stats' %>
   </section>
-  
+
   <div class="col-sm-6 col-sm-offset-3">
     <div id='tweet_index_container'>
       <%= render partial: 'tweet_index'%>
@@ -69,7 +69,24 @@
       <div class="modal-content">
         <div class="modal-body">
           <div id="tweet_form_container">
-            <%= render partial: 'tweet_form'%>
+            <div class='container'>
+              <div class='row'>
+                <div class='col-sm-6' id='chipper-box'>
+                  <%= form_for @tweet, remote: true do |f| %>
+                  <h3>Compose New Chipper</h3>
+                  <%= f.text_area :body %>
+                  <br>
+                  <%= f.label :all_tags %>
+                  <%= f.text_field :all_tags %>
+                  <div class="modal-footer">
+
+                    <%= f.submit 'Chipper away', data: {'data-dismiss' => 'modal', 'aria-label' => 'Close'} %>
+                    <button type='button' id='cancel-button' data-dismiss='modal' aria-label='Close'><%= link_to 'Cancel', tweets_path %></button>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
