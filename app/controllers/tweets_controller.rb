@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class TweetsController < ApplicationController
+
   before_action :authenticate_user!, except: %i[home index show]
   before_action :set_tweet, only: %i[show edit update destroy retweet]
 
-  def feed
-  end
+  def feed; end
 
   def home
     redirect_to tweets_path if user_signed_in?
@@ -12,14 +14,14 @@ class TweetsController < ApplicationController
   def index
     @reply = Reply.new
     @tweet = Tweet.new
-    @tweets = Tweet.paginate(:page => params[:page], :per_page => 8)
+    @tweets = Tweet.paginate(page: params[:page], per_page: 8)
     @user = current_user
 
-    if params[:tag]
-      @tweets = Tweet.tagged_with(params[:tag])
-    else
-      @tweets = Tweet.all.order('created_at DESC')
-    end
+    @tweets = if params[:tag]
+                Tweet.tagged_with(params[:tag])
+              else
+                Tweet.all.order('created_at DESC')
+              end
     # if params[:search]
     #   @tweets = Tweet.search(params[:search]).order('created_at DESC')
     # else
@@ -87,15 +89,15 @@ class TweetsController < ApplicationController
   def retweet
     if @tweet
       @retweet = current_user.tweets.build(body: @tweet.body, user_id: @tweet.user_id)
-        if @retweet.save
-          redirect_to tweet_path(@retweet)
-          flash[:success] = "Retweet Successful!"
-        else
-          redirect_to user_path(current_user), notice: @retweet.errors.full_messages
-        end
+      if @retweet.save
+        redirect_to tweet_path(@retweet)
+        flash[:success] = 'Retweet Successful!'
+      else
+        redirect_to user_path(current_user), notice: @retweet.errors.full_messages
+      end
     else
       redirect_back_or current_user
-      flash[:error] = "Retweet error!"
+      flash[:error] = 'Retweet error!'
     end
   end
 

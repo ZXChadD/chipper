@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
 
   def show
@@ -18,16 +20,16 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = "Following"
+    @title = 'Following'
     @user = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
     render 'following'
   end
 
   def followers
-    @title = "Followers"
+    @title = 'Followers'
     @user = User.find(params[:id])
-    @users = @user.following.paginate(page: params[:page])
+    @users = @user.followers.paginate(page: params[:page])
     render 'following'
   end
 
@@ -36,4 +38,5 @@ class UsersController < ApplicationController
   def avatar_params
     params.require(:user).permit(:avatar)
   end
+
 end

@@ -1,39 +1,51 @@
 AllCops:
+  TargetRubyVersion: 2.3
   Exclude:
-    - 'db/**'
-    - 'vendor/**/*'
-    - 'spec/fixtures/**/*'
-    - 'tmp/**/*'
-  TargetRubyVersion: 2.0
+    - app/channels/**/*
+    - app/controllers/users/**/*
+    - .gems/**/*
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - log/**/*
+    - public/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+    - spec/**/*
+    - config.ru
+    - Guardfile
+    - Rakefile
+
+Style/Documentation:
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
-  EnforcedStyle: always
+  Enabled: false
 
-Layout/EndOfLine:
-  EnforcedStyle: lf
+Style/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
 
-Layout/IndentHeredoc:
-  EnforcedStyle: powerpack
+Style/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines
 
-Lint/AmbiguousBlockAssociation:
+Style/EmptyLinesAroundBlockBody:
+  EnforcedStyle: no_empty_lines
+
+Style/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/AbcSize:
   Exclude:
-    - 'spec/**/*.rb'
+    - app/controllers/**/*
 
-Lint/UselessAccessModifier:
-  MethodCreatingMethods:
-    - 'def_matcher'
-    - 'def_node_matcher'
-
-Metrics/BlockLength:
-  Exclude:
-    - 'Rakefile'
-    - '**/*.rake'
-    - 'spec/**/*.rb'
-
-Metrics/ModuleLength:
-  Exclude:
-    - 'spec/**/*.rb'
-
-Performance/Caller:
-  Exclude:
-    - spec/rubocop/cop/performance/caller_spec.rb
+Rails:
+  Enabled: true

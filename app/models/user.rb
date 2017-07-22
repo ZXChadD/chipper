@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
+
   mount_uploader :avatar, AvatarUploader
 
   attr_accessor :login
@@ -11,7 +14,7 @@ class User < ApplicationRecord
   # Username Validation
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
+  validates :username, format: { with: /^[a-zA-Z0-9_\.]*$/, multiline: true }
 
   # Email Validation
   validates :email, presence: true, uniqueness: { case_sensitive: false }
@@ -25,7 +28,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :notifications, foreign_key: 'recipient_id'
-  has_many :retweets, class_name: "tweet"
+  has_many :retweets, class_name: 'tweet'
 
   has_many :following, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
   has_many :followers, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
@@ -41,9 +44,9 @@ class User < ApplicationRecord
 
   def following?(other)
     if following.find_by(followed_id: other.id).nil?
-      return false
+      false
     else
-      return true
+      true
     end
   end
 
@@ -87,4 +90,5 @@ class User < ApplicationRecord
   def avatar_size_validation
     errors[:avatar] << 'should be less than 500KB' if avatar.size > 0.5.megabytes
   end
+
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -22,6 +24,7 @@ gem 'uglifier', '>= 1.3.0'
 # new gems
 gem 'devise'
 
+gem 'bootstrap-will_paginate'
 gem 'carrierwave'
 gem 'faker', '~> 1.6', '>= 1.6.3'
 gem 'filterrific'
@@ -29,9 +32,8 @@ gem 'fog'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'omniauth-facebook'
-gem 'will_paginate'
-gem 'bootstrap-will_paginate'
 gem 'ui_faces'
+gem 'will_paginate'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -56,6 +58,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5'
+  gem 'rubocop', require: false
   gem 'shoulda-matchers'
 end
 

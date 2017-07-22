@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class Tweet < ApplicationRecord
+
   belongs_to :user
   has_many :replies, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -20,8 +23,9 @@ class Tweet < ApplicationRecord
   def all_tags
     tags.map(&:name).join(', ')
   end
-  
+
   def self.search(search)
     where('body ILike ?', "%#{search}%")
   end
+
 end

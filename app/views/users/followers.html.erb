@@ -15,7 +15,7 @@
     <h3><%= @title %></h3>
     <% if @users.any? %>
       <ul class="users follow">
-        <% @users.pluck(:followed_id).each do |id| %>
+        <% @users.pluck(:follower_id).each do |id| %>
           <%= image_tag User.find(id).avatar, class: "img-thumbnail" %>
           <%= link_to User.find(id).username, user_path(User.find(id)) %>
         <% end %>
