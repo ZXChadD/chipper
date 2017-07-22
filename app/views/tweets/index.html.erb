@@ -1,90 +1,40 @@
-      <nav class='navbar navbar-inverse' id='top-navbar'>
-        <div class='container-fluid'>
-          <div class='navbar-header'>
-            <%= image_tag 'chipper-icon.png', :class => 'logo' %>
-          </div>
-          <ul class='nav navbar-nav'>
-            <li><%= link_to :Home, tweets_path %></li>
-            <li><%= link_to 'Profile Page', user_path(@user) %></li>
-
-              <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', "data-toggle" => "modal", "data-target" => "#myTweet", remote: true %></li>
-            <li><%= link_to 'Feed', feed_tweets_path %></li>
-          </ul>
-
-
-          <% if user_signed_in? %>
-          <ul class="nav navbar-nav navbar-right">
-
-                <li class="dropdown notification-dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <%= current_user.notifications.where(read: false).count %>
-                  <span class="glyphicon glyphicon-flag"></span> Notifications
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby= 'dropdownMenu1'>
-                 <li class="dropdown-header text-center">Notifications</li>
-                  <li class="dropdown-header text-center">
-                    <% current_user.notifications.all.each do |notification| %>
-                    <% if notification.read == false %>
-                    <%= link_to "#{User.find(notification.actor_id).username} has #{notification.notifiable_type.downcase} your tweet",link_through_path(notification) %>
-                    <% end %>
-                    <% end %>
-                    </ul>
-                </li>
-                <li>
-                  <%= link_to edit_user_registration_path do%>
-                  <span class='glyphicon glyphicon-user'></span>Edit Profile
-                  <% end %>
-                </li>
-
-                <li>
-                  <%= link_to destroy_user_session_path, method: :delete do%>
-                  <span class='glyphicon glyphicon-log-in'></span>Log Out
-                  <% end %>
-                </li>
-                <% end %>
-          </ul>
-        </div>
-      </nav>
-
-
-  <!-- <%= form_tag tweets_path, method: :get do %>
+<!-- <%= form_tag tweets_path, method: :get do %>
     <p>
       <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
       <%= submit_tag 'Search', :name => nil %>
     </p>
   <% end %> -->
 
-  <section class="stats">
-     <%= render partial: 'shared/stats' %>
-  </section>
+<section class="stats">
+  <%= render partial: 'shared/stats' %>
+</section>
 
-  <div class="col-sm-6 col-sm-offset-3">
-    <div id='tweet_index_container'>
-      <%= render partial: 'tweet_index'%>
-    </div>
+<div class="col-sm-6 col-sm-offset-3">
+  <div id='tweet_index_container'>
+    <%= render partial: 'tweet_index'%>
   </div>
+</div>
 
-  <div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div id="tweet_form_container">
-            <div class='container'>
-              <div class='row'>
-                <div class='col-sm-6' id='chipper-box'>
-                  <%= form_for @tweet, remote: true do |f| %>
-                  <h3>Compose New Chipper</h3>
-                  <%= f.text_area :body %>
-                  <br>
-                  <%= f.label :all_tags %>
-                  <%= f.text_field :all_tags %>
-                  <div class="modal-footer">
+<div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="tweet_form_container">
+          <div class='container'>
+            <div class='row'>
+              <div class='col-sm-6' id='chipper-box'>
+                <%= form_for @tweet, remote: true do |f| %>
+                <h3>Compose New Chipper</h3>
+                <%= f.text_area :body %>
+                <br>
+                <%= f.label :all_tags %>
+                <%= f.text_field :all_tags %>
+                <div class="modal-footer">
 
-                    <%= f.submit 'Chipper away', data: {'data-dismiss' => 'modal', 'aria-label' => 'Close'} %>
-                    <button type='button' id='cancel-button' data-dismiss='modal' aria-label='Close'><%= link_to 'Cancel', tweets_path %></button>
-                  </div>
-                  <% end %>
+                  <%= f.submit 'Chipper away', data: {'data-dismiss' => 'modal', 'aria-label' => 'Close'} %>
+                  <button type='button' id='cancel-button' data-dismiss='modal' aria-label='Close'><%= link_to 'Cancel', tweets_path %></button>
                 </div>
+                <% end %>
               </div>
             </div>
           </div>
@@ -92,5 +42,6 @@
       </div>
     </div>
   </div>
+</div>
 
 </div>
