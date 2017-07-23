@@ -15,4 +15,9 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import "bootstrap/**/*";
  @import "css/**/*";
+
+ .text-center {
+   text-align: center;
+ }

@@ -1,0 +1,47 @@
+<% if user_signed_in? %>
+<nav class='navbar navbar-inverse' id='top-navbar'>
+  <div class='container-fluid'>
+    <div class='navbar-header'>
+      <%= image_tag 'chipper-icon.png', :class => 'logo' %>
+    </div>
+    <ul class='nav navbar-nav'>
+      <li><%= link_to :Home, tweets_path %></li>
+      <li><%= link_to 'Profile Page', user_path(@user) %></li>
+
+      <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', "data-toggle" => "modal", "data-target" => "#myTweet", remote: true %></li>
+      <li><%= link_to 'Feed', feed_tweets_path %></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+
+      <li class="dropdown notification-dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <%= current_user.notifications.where(read: false).count %>
+          <span class="glyphicon glyphicon-flag"></span>
+          Notifications
+        </a>
+        <ul class="dropdown-menu" aria-labelledby='dropdownMenu1'>
+          <li class="dropdown-header text-center">Notifications</li>
+          <li class="dropdown-header text-center">
+            <% current_user.notifications.all.each do |notification| %>
+            <% if notification.read == false %>
+            <%= link_to "#{User.find(notification.actor_id).username} has #{notification.notifiable_type.downcase} your tweet",link_through_path(notification) %>
+            <% end %>
+            <% end %>
+        </ul>
+      </li>
+      <li>
+        <%= link_to edit_user_registration_path do%>
+        <span class='glyphicon glyphicon-user'></span>Edit Profile
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete do%>
+        <span class='glyphicon glyphicon-log-in'></span>Log Out
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
+<% end %>
