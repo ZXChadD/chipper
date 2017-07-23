@@ -1,6 +1,6 @@
+<% if user_signed_in? %>
 <nav class='navbar navbar-inverse' id='top-navbar'>
   <div class='container-fluid'>
-    <% if user_signed_in? %>
     <div class='navbar-header'>
       <%= image_tag 'chipper-icon.png', :class => 'logo' %>
     </div>
@@ -41,7 +41,7 @@
         <span class='glyphicon glyphicon-log-in'></span>Log Out
         <% end %>
       </li>
-      <% end %>
     </ul>
   </div>
 </nav>
+<% end %>

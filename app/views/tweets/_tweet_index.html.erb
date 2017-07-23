@@ -30,6 +30,7 @@
     <%= render partial: 'hearts/button', locals: {tweet: tweet} %>
   </div>
 </div>
+
 <div class="card-footer text-muted">
   <% tweet.replies.each do |reply| %>
   <p class="card-text">@<%= reply.user.username %>
