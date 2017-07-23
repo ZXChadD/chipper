@@ -7,7 +7,6 @@
     <ul class='nav navbar-nav'>
       <li><%= link_to :Home, tweets_path %></li>
       <li><%= link_to 'Profile Page', user_path(@user) %></li>
-
       <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', "data-toggle" => "modal", "data-target" => "#myTweet", remote: true %></li>
       <li><%= link_to 'Feed', feed_tweets_path %></li>
     </ul>

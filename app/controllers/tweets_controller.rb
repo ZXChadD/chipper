@@ -3,7 +3,9 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!, except: %i[home index show]
   before_action :set_tweet, only: %i[show edit update destroy retweet]
 
-  def feed; end
+  def feed
+    @user = current_user
+  end
 
   def home
     redirect_to tweets_path if user_signed_in?
