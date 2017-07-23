@@ -11,7 +11,7 @@ class RepliesController < ApplicationController
     @reply = @tweet.replies.new(reply_params)
     @reply.user = current_user
     if @reply.save!
-      create_notification
+      Notification.create(recipient: @tweet.user, actor: current_user, action: 'replied', notifiable: @reply) unless @tweet.user == current_user 
       redirect_to tweets_path
     end
   end
@@ -29,7 +29,6 @@ class RepliesController < ApplicationController
   def create_notification
     @users = User.all
     (@users.uniq - [current_user]).each do |user|
-      Notification.create(recipient: user, actor: current_user, action: 'replied', notifiable: @reply)
     end
   end
 
