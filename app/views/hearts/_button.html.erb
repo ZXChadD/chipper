@@ -1,6 +1,11 @@
-<% if current_user.heart?(tweet) %>
-  <%= button_to "Unheart", unheart_path(tweet_id: tweet.id), remote: true, method: :delete %>
+<%= pluralize(tweet.likes.count, 'like') %>
+<br>
+<% if current_user.likes.find_by(tweet_id: tweet).present? %>
+  <%= link_to downvote_tweet_path(tweet), method: :delete, remote: true, class: 'post-bottom-button' do%>
+    <span class='glyphicon glyphicon-thumbs-down'></span>
+  <% end %>
 <% else %>
-  <%= button_to "Heart", hearts_path(tweet_id: tweet.id), remote: :true %>
-  <span class="glyphicon glyphicon-heart"></span>
+  <%= link_to upvote_tweet_path(tweet), method: :post, remote: true, class: 'post-bottom-button' do%>
+    <span class='glyphicon glyphicon-thumbs-up'></span>
+  <% end %>
 <% end %>

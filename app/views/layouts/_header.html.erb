@@ -1,5 +1,6 @@
 <nav class='navbar navbar-inverse' id='top-navbar'>
   <div class='container-fluid'>
+    <% if user_signed_in? %>
     <div class='navbar-header'>
       <%= image_tag 'chipper-icon.png', :class => 'logo' %>
     </div>
@@ -11,7 +12,6 @@
       <li><%= link_to 'Feed', feed_tweets_path %></li>
     </ul>
 
-    <% if user_signed_in? %>
     <ul class="nav navbar-nav navbar-right">
 
       <li class="dropdown notification-dropdown">

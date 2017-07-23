@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TweetsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[home index show]
@@ -83,6 +81,16 @@ class TweetsController < ApplicationController
       else
         format.js { render action: 'index' }
       end
+    end
+  end
+
+  def downvote
+    @tweet = Tweet.find(params[:id])
+    @like = @tweet.likes.find_by(user_id: current_user).destroy
+    @reply = Reply.new
+
+    respond_to do |format|
+      format.js
     end
   end
 

@@ -1,11 +1,10 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
-  get 'pages/index'
 
   root 'tweets#home'
 
-  # root 'pages#index'
+  get 'pages/index'
+
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users do
     member do
@@ -23,6 +22,7 @@ Rails.application.routes.draw do
   resources :tweets do
     member do
       post 'upvote'
+      delete 'downvote'
       get 'retweet'
     end
     resources :replies
