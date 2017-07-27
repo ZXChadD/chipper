@@ -1,6 +1,25 @@
 <div class="card-header">
   "Quote of the Day"
+  <div class="dropdown show">
+    <p class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Replies (<%= tweet.replies.count %>)
+    </p>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <% tweet.replies.each do |reply| %>
+      <p class="card-text">@<%= reply.user.username %>
+        :
+        <%= reply.body %></p>
+      <% end %>
+      <%= form_for @reply, url: tweet_replies_path(tweet) do |f| %>
+      <%= f.text_field :body %>
+      <br>
+      <%= f.submit "Submit" %>
+      <%= link_to "Cancel", tweets_path, :id => 'cancel-button' %>
+      <% end %>
+    </div>
+  </div>
 </div>
+
 <div class="card-block">
   <span class="card-title"><%= image_tag tweet.user.avatar, class: "img-thumbnail" %>
     @<%=link_to tweet.user.username, user_path(tweet.user.id)%>
@@ -16,9 +35,6 @@
   <br>
 
   <div class="right-index-footer">
-    <%= link_to new_tweet_reply_path(tweet), "data-toggle" => "modal", "data-target" => "#myReply", remote: true, class:"post-bottom-button", id: "reply-button" do%>
-    <span class='glyphicon glyphicon-share-alt'></span>Reply
-    <% end %>
   <% if tweet.user != current_user %>
     <%= link_to retweet_tweet_path(tweet), class: "post-bottom-button",id: "retweet-button" do%>
     <span class='glyphicon glyphicon-repeat'></span>Retweet
@@ -32,11 +48,6 @@
 </div>
 
 <div class="card-footer text-muted">
-  <% tweet.replies.each do |reply| %>
-  <p class="card-text">@<%= reply.user.username %>
-    :
-    <%= reply.body %></p>
-  <% end %>
 </div>
 
 <div class="modal fade" id="myReply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -68,10 +68,11 @@ RSpec.describe TweetsController, type: :controller do
     let!(:tweet){ create(:tweet) }
     before do
       post :upvote, params: {}
+    end
 
     it 'when user create a new like' do
       post :upvote
     end
-
   end
+  
 end
