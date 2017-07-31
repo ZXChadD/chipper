@@ -7,7 +7,6 @@
     <ul class='nav navbar-nav'>
       <li><%= link_to :Home, tweets_path %></li>
       <li><%= link_to 'Profile Page', user_path(@user) %></li>
-
       <li><%= link_to 'New Chipper', new_tweet_path, id: 'new_chipper', "data-toggle" => "modal", "data-target" => "#myTweet", remote: true %></li>
       <li><%= link_to 'Feed', feed_tweets_path %></li>
     </ul>
@@ -24,9 +23,9 @@
           <li class="dropdown-header text-center">Notifications</li>
           <li class="dropdown-header text-center">
             <% current_user.notifications.all.each do |notification| %>
-            <% if notification.read == false %>
-            <%= link_to "#{User.find(notification.actor_id).username} has #{notification.notifiable_type.downcase} your tweet",link_through_path(notification) %>
-            <% end %>
+              <% if notification.read == false %>
+                <%= link_to "#{User.find(notification.actor_id).username} has #{notification.action.downcase} your tweet",link_through_path(notification) %>
+              <% end %>
             <% end %>
         </ul>
       </li>
@@ -45,3 +44,5 @@
   </div>
 </nav>
 <% end %>
+
+<%= render partial: 'tweets/tweet_form' %>

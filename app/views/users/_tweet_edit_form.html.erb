@@ -1,8 +1,8 @@
-<div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="editTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class='col-xs-12 col-sm-8 col-sm-offset-2' id='chipper-box'>
-      <%= form_for @tweet, remote: true do |f| %>
-      <h3>Compose New Chipper</h3>
+      <%= form_for(tweet, remote: true) do |f| %>
+      <h3>Edit Chipper</h3>
       <%= f.text_area :body %>
       <br>
       <%= f.label :all_tags %>

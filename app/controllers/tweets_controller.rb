@@ -2,8 +2,11 @@ class TweetsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[home index show]
   before_action :set_tweet, only: %i[show edit update destroy retweet]
+  before_action :set_user, only: %i[feed index edit]
 
-  def feed; end
+  def feed
+    @user = current_user
+  end
 
   def home
     redirect_to tweets_path if user_signed_in?
@@ -12,24 +15,21 @@ class TweetsController < ApplicationController
   def index
     @reply = Reply.new
     @tweet = Tweet.new
-    @tweets = Tweet.paginate(page: params[:page], per_page: 8)
+    @tweets = Tweet.all.order('created_at DESC')
     @user = current_user
 
     @tweets = if params[:tag]
                 Tweet.tagged_with(params[:tag])
+              elsif params[:search]
+                @tweets = Tweet.search(params[:search]).order('created_at DESC')
               else
-                Tweet.all.order('created_at DESC')
+                @tweets = Tweet.all.order('created_at DESC')
               end
-    # if params[:search]
-    #   @tweets = Tweet.search(params[:search]).order('created_at DESC')
-    # else
-    #   @tweets = Tweet.all.order('created_at DESC')
-    # end
   end
 
-  # def new
-  #   @tweet = Tweet.new
-  # end
+  def new
+    @tweet = Tweet.new
+  end
 
   def create
     @tweets = Tweet.all.order('created_at DESC')
@@ -110,6 +110,10 @@ class TweetsController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def set_tweet
     @tweet = Tweet.find(params[:id])
