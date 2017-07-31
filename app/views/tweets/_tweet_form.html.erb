@@ -1,24 +1,18 @@
-<div class='container'>
-  <div class='row'>
-    <div id="tweet_form_container">
-      <div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class='col-xs-12 col-sm-8 col-sm-offset-2' id='chipper-box'>
-            <%= form_for @tweet, remote: true do |f| %>
-            <h3>Compose New Chipper</h3>
-            <%= f.text_area :body %>
-            <br>
-            <%= f.label :all_tags %>
-            <%= f.text_field :all_tags %>
-            <div class="modal-footer">
+<div class="modal fade" id="myTweet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class='col-xs-12 col-sm-8 col-sm-offset-2' id='chipper-box'>
+      <%= form_for @tweet, remote: true do |f| %>
+      <h3>Compose New Chipper</h3>
+      <%= f.text_area :body %>
+      <br>
+      <%= f.label :all_tags %>
+      <%= f.text_field :all_tags %>
+      <div class="modal-footer">
 
-              <%= f.submit 'Chipper away', data: {'data-dismiss' => 'modal', 'aria-label' => 'Close'} %>
-              <button type='button' id='cancel-button' data-dismiss='modal' aria-label='Close'><%= link_to 'Cancel', tweets_path %></button>
-            </div>
-            <% end %>
-          </div>
-        </div>
+        <%= f.submit 'Chipper away', data: {'data-dismiss' => 'modal', 'aria-label' => 'Close'} %>
+        <button type='button' id='cancel-button' data-dismiss='modal' aria-label='Close'><%= link_to 'Cancel', tweets_path %></button>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -15,24 +15,21 @@ class TweetsController < ApplicationController
   def index
     @reply = Reply.new
     @tweet = Tweet.new
-    @tweets = Tweet.paginate(page: params[:page], per_page: 8)
+    @tweets = Tweet.all.order('created_at DESC')
     @user = current_user
 
     @tweets = if params[:tag]
                 Tweet.tagged_with(params[:tag])
+              elsif params[:search]
+                @tweets = Tweet.search(params[:search]).order('created_at DESC')
               else
-                Tweet.all.order('created_at DESC')
+                @tweets = Tweet.all.order('created_at DESC')
               end
-    # if params[:search]
-    #   @tweets = Tweet.search(params[:search]).order('created_at DESC')
-    # else
-    #   @tweets = Tweet.all.order('created_at DESC')
-    # end
   end
 
-  # def new
-  #   @tweet = Tweet.new
-  # end
+  def new
+    @tweet = Tweet.new
+  end
 
   def create
     @tweets = Tweet.all.order('created_at DESC')
