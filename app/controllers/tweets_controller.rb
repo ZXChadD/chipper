@@ -2,6 +2,7 @@ class TweetsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[home index show]
   before_action :set_tweet, only: %i[show edit update destroy retweet]
+  before_action :set_user, only: %i[feed index edit]
 
   def feed
     @user = current_user
@@ -112,6 +113,10 @@ class TweetsController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def set_tweet
     @tweet = Tweet.find(params[:id])

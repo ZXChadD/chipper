@@ -35,11 +35,11 @@
   <br>
 
   <div class="right-index-footer">
-  <% if tweet.user != current_user %>
-    <%= link_to retweet_tweet_path(tweet), class: "post-bottom-button",id: "retweet-button" do%>
-    <span class='glyphicon glyphicon-repeat'></span>Retweet
+    <% if tweet.user != current_user %>
+      <%= link_to retweet_tweet_path(tweet), class: "post-bottom-button",id: "retweet-button" do%>
+      <span class='glyphicon glyphicon-repeat'></span>Retweet
+      <% end %>
     <% end %>
-  <% end %>
   </div>
 
   <div id='tweet_like_container-<%= tweet.id %>' class="like-footer">
